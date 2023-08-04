@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="dashboard-body">
+    <div class="sidebar">
+        <a href="#"><img src="{% static 'images/RPrice.png' %}" alt="RPrice Logo"></a>
+        <a href="#">Calcular</a>
+        <a href="{% url 'logout' %}">Sair</a>
+    </div>
+    <div lass="dashboard-body">
+        <h1>Bem-vindo ao Dashboard, {{ user.username }}</h1>
+        <!-- Implementar aqui. -->
+    </div>
+
+    <!-- Importe os arquivos JavaScript aqui -->
+    <script src="{% static 'js/criar_funcao_aqui.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/images/RPrice.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out; /* Adiciona um efeito de fade-in */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.container {
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-group {
+    text-align: center;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    padding-top: 20px;
+    color: #fff;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}

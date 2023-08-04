@@ -1,46 +1,28 @@
-from django.shortcuts import render, redirect
-from django.contrib import auth
+from django.shortcuts import render, redirect, reverse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User 
+from django.contrib.auth.decorators import login_required
 
-def user_login(request):
+
+def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username').strip()  # Remove espaços em branco no início e no final
-        password = request.POST.get('password').strip()
-
-        if not username or not password:
-            messages.error(request, message='Usuário e/ou senha inválidos')
-            return redirect('login')
-
-        check_user = auth.authenticate(username=username, password=password)
-        
-        if check_user is None:
-            messages.error(request, message='Usuário e/ou senha inválidos')
-            return redirect('login')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
         else:
-            auth.login(request, check_user)
-            return redirect('home')
-        
-    else:
-        return render(request, 'pages/login.html')
+            messages.error(request, 'Credenciais inválidas. Por favor, tente novamente ou faça o cadastro.')
+    return render(request, 'login.html')
 
-def user_logout(request):
-    auth.logout(request)
-    return redirect('login')
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Redireciona para a página de login após o logout
 
-def cadastro(request):
-    if request.method == 'POST':
-        username = request.POST.get('username').strip()
-        email = request.POST.get('email').strip()
-        password = request.POST.get('password').strip()
-        re_password = request.POST.get('re-password').strip()
-        
-        if not username or not email or not password or not re_password:
-            messages.error(request, message='Preencha todos os campos')
-            return redirect('cadastro')
+def landing_page_view(request):
+    return render(request, 'landing_page.html')
 
-        if password == re_password:
-            User.objects.create_user(username=username, password=password, email=email)
-            return redirect('login')
-    else:
-        return render(request, 'pages/cadastro.html')
+@login_required
+def dashboard_view(request):
+    return render(request, 'dashboard.html')
