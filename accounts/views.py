@@ -13,7 +13,7 @@ def login_view(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.error(request, 'Credenciais inválidas. Por favor, tente novamente ou faça o cadastro.')
+            messages.error(request, 'Credenciais inválidas.')
     return render(request, 'login.html')
 
 def logout_view(request):
