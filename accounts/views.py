@@ -28,4 +28,7 @@ def dashboard_view(request):
     return render(request, 'dashboard.html')
 
 def primeiro_acesso(request):
-    return render(request, 'primeiro_acesso.html')
+    return render(request, 'primeiro_acesso.html') # Redireciona para a página de primeiro acesso
+
+def recuperar_senha(request):
+    return render(request, 'recuperar_senha.html') # Redireciona para a página de recuperar senha
