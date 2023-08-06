@@ -26,3 +26,6 @@ def landing_page_view(request):
 @login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html')
+
+def primeiro_acesso(request):
+    return render(request, 'primeiro_acesso.html')
