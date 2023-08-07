@@ -1,17 +1,41 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpResponseNotFound, HttpResponseBadRequest
+from django.shortcuts import render, redirect
+from django.http import HttpResponseNotFound
+from django.core.mail import EmailMessage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-import logging
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
+import logging
 
 import string
 
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Definir o formato de registro
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+# Criar um manipulador de registro para registrar no arquivo
+file_handler = logging.FileHandler('email_log.txt')
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+# Criar um manipulador de registro para exibir registros no console
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
 
 
 def login_view(request):
@@ -47,6 +71,12 @@ def recuperar_senha(request):
     return render(request, 'recuperar_senha.html') # Redireciona para a página de recuperar senha
 
 # inclusão da condiguração de envio de e-mail
+
+logger = logging.getLogger(__name__)
+
+logger = logging.getLogger(__name__)
+
+
 def enviar_email_cadastro(request):
     logger = logging.getLogger('django')  # Crie um logger com o nome 'django'
     

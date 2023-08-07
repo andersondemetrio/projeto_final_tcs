@@ -1,0 +1,22 @@
+2023-08-07 16:13:28,835 - DEBUG - E-mail enviado para ##############################: b'anderson.debhora@gmail.com'
+2023-08-07 16:13:28,836 - DEBUG - Mensagem do e-mail ################################: Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: http://seusite.com/cadastro/?token=lVPPoBpZ1vWK0mKt
+2023-08-07 16:14:52,564 - DEBUG - E-mail enviado para ##############################: b'anderson.debhora@gmail.com'
+2023-08-07 16:14:52,565 - DEBUG - Mensagem do e-mail ################################: Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: http://seusite.com/cadastro/?token=GP4qHHzK6kOkcn5E
+2023-08-07 16:16:13,715 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:30:07,512 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:31:27,752 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:39:15,547 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:41:11,977 - ERROR - Erro ao enviar e-mail: send_mail() got an unexpected keyword argument 'encoding'
+2023-08-07 17:42:08,044 - ERROR - Erro ao enviar e-mail: send_mail() got an unexpected keyword argument 'encoding'
+2023-08-07 17:42:37,563 - DEBUG - E-mail enviado para: anderson.debhora@gmail.com
+2023-08-07 17:42:37,564 - DEBUG - Mensagem do e-mail: Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: http://seusite.com/cadastro/?token=BXBpl95SOK0V8vSc
+2023-08-07 17:42:37,565 - ERROR - Erro ao enviar e-mail: send_mail() got an unexpected keyword argument 'encoding'
+2023-08-07 17:44:00,785 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:46:15,673 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:47:13,317 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:47:51,409 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:47:51,410 - DEBUG - E-mail enviado para: anderson.debhora@gmail.com
+2023-08-07 17:49:17,751 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:50:03,151 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:50:28,545 - ERROR - Erro ao enviar e-mail: 'ascii' codec can't encode character '\xe7' in position 51: ordinal not in range(128)
+2023-08-07 17:53:55,843 - ERROR - Erro ao enviar e-mail: 'bytes' object has no attribute 'encode'
