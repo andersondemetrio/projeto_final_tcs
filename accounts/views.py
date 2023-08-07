@@ -4,6 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import logging
+
+
+import string
+
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 
 
 def login_view(request):
@@ -37,3 +45,28 @@ def primeiro_acesso(request):
 
 def recuperar_senha(request):
     return render(request, 'recuperar_senha.html') # Redireciona para a página de recuperar senha
+
+# inclusão da condiguração de envio de e-mail
+def enviar_email_cadastro(request):
+    logger = logging.getLogger('django')  # Crie um logger com o nome 'django'
+    
+    logger.setLevel(logging.DEBUG)
+    mensagem_email = ''  # Inicializa a variável mensagem_email com uma string vazia
+
+    if request.method == 'POST':
+        user_email = request.POST.get('email')
+        token = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+        link_cadastro = f'http://seusite.com/cadastro/?token={token}'
+        mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro}'
+
+        send_mail(
+            'Conclua seu cadastro no RPrice',
+            mensagem_email,
+            settings.DEFAULT_FROM_EMAIL,
+            [user_email],
+            fail_silently=True,
+        )
+
+        return render(request, 'pagina_email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
+
+    return render(request, 'enviar_email_cadastro.html', {'mensagem_email': mensagem_email})
