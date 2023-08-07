@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Cadastro de Usuário</title>
     <link rel="stylesheet" href="/static/styles.css" />
     <script defer src="/static/js/criar_funcao_aqui.js"></script>
   </head>
   <body>
     <div class="container">
-      <div class="container-left">Uma imagem aqui!!!!!!</div>
+      <div class="container-left">Uma imagem aqui !</div>
       <div class="container-right">
         <h1>RPrice</h1>
         {% if messages %}
@@ -17,7 +17,7 @@
             <div class="alert alert-danger">{{ message }}</div>
           {% endfor %}
         {% endif %}
-        <form method="post">
+        <form method="post" action="{% url 'enviar_email_cadastro' %}">
           {% csrf_token %}
           <div class="input-title">
             <h3>Cadastro de Usuário</h3>
@@ -34,8 +34,9 @@
           </div>
 
           <div class="input-group">
-            <label for="username">E-mail:</label>
-            <input type="text" id="email" name="email" required />
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required />
+            {# Use type="email" para validar o formato do e-mail #}
           </div>
 
           <div class="button-group">
