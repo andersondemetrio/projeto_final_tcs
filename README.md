@@ -19,3 +19,12 @@ python manage.py migrate
 roder o serviço
 
 python manage.py runserver
+
+Crie o arquivo .env na raiz do projeto
+
+EMAIL_HOST=smtp.office365.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=usuario@gmail.com
+EMAIL_HOST_PASSWORD=senha_usuario
+DEFAULT_FROM_EMAIL=email_default.com
