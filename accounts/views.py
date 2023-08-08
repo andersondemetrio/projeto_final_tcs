@@ -18,7 +18,6 @@ from django.conf import settings
 import random
 
 
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
@@ -36,7 +35,6 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
-
 
 def login_view(request):
     if request.method == 'POST':
@@ -56,13 +54,6 @@ def logout_view(request):
 
 def landing_page_view(request):
     return render(request, 'landing_page.html')
-
-@login_required(redirect_field_name='login')
-def dashboard_view(request):
-    if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
-    else:
-        return HttpResponseNotFound('Página não encontrada.')
 
 def primeiro_acesso(request):
     return render(request, 'primeiro_acesso.html') # Redireciona para a página de primeiro acesso
@@ -100,3 +91,11 @@ def enviar_email_cadastro(request):
         return render(request, 'pagina_email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
 
     return render(request, 'enviar_email_cadastro.html', {'mensagem_email': mensagem_email})
+
+from django.shortcuts import redirect
+
+def redirect_to_custom_login(request):
+    next_url = request.GET.get('next', '')
+    if next_url:
+        return redirect(f'/login/?next={next_url}')
+    return redirect('/login/')
