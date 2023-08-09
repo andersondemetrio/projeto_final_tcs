@@ -13,7 +13,7 @@ EMAIL_HOST_PASSWORD=senha_usuario
 DEFAULT_FROM_EMAIL=email_default.com
 ```
 
-# Criando um ambiente virtual (virtual env)
+### Criando um ambiente virtual (virtual env)
 
 ```bash
 # crie o env:
