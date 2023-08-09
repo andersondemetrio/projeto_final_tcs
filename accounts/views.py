@@ -77,8 +77,13 @@ def enviar_email_cadastro(request):
     if request.method == 'POST':
         user_email = request.POST.get('email')
         token = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
-        link_cadastro = f'http://seusite.com/cadastro/?token={token}'
-        mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro}'
+        link_cadastro = f'http://127.0.0.1:8000/login'
+       # mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro}'
+
+        # use a função gerar_senha_aleatoria para enviar junto com o e-mail de cadastro
+        senha_aleatoria = gerar_senha_aleatoria()
+        mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro} e sua senha é: {senha_aleatoria}'
+       
 
         send_mail(
             'Conclua seu cadastro no RPrice',
@@ -99,3 +104,14 @@ def redirect_to_custom_login(request):
     if next_url:
         return redirect(f'/login/?next={next_url}')
     return redirect('/login/')
+
+# crie uma função para gerar senha aleatória
+
+def gerar_senha_aleatoria():
+    # Definir todos os caracteres que serão usados para gerar a senha
+    caracteres = string.ascii_letters + string.digits
+    # Definir o tamanho da senha
+    tamanho = random.randint(8, 16)
+    # Gerar a senha
+    senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
+    return senha
