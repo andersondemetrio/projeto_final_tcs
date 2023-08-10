@@ -74,11 +74,11 @@ class ModelTests(TestCase):
         self.assertEqual(cargo.nome_cargo, "Gerente")
         # Adicione mais asserções conforme necessário
 
-    #faz um select no banco e verifica se o valor é igual ao esperado
+        #faz um select no banco e verifica se o valor é igual ao esperado
     def validar_usuario(self):
         usuario = Usuarios.objects.get(email="")
         self.assertEqual(usuario.email,"")
         #print resultado
-        print(usuario.email)
+        self.stdout.write(f"Email do usuário: {usuario.email}")
 
     # Adicione mais métodos de teste para outros modelos aqui
