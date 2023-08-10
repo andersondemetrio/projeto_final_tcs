@@ -91,6 +91,7 @@ def enviar_email_cadastro(request):
             settings.DEFAULT_FROM_EMAIL,
             [user_email],
             fail_silently=True,
+            
         )
 
         return render(request, 'email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
