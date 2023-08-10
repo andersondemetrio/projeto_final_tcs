@@ -1,6 +1,6 @@
 ## Projeto Final de Conclusão de Curso
 
-### Criando as variaveis de ambiente (.env) na razi do projeto:
+### Criando as variaveis de ambiente (.env) na raiz do projeto:
 
 ```bash
 touch .env
@@ -11,11 +11,12 @@ EMAIL_USE_TLS=True
 EMAIL_HOST_USER=usuario@gmail.com
 EMAIL_HOST_PASSWORD=senha_usuario
 DEFAULT_FROM_EMAIL=email_default.com
-<<<<<<< HEAD
+```
 
+### Banco de dados
+```
 Roder o seguinte comando em docker
 docker run --name teste -e POSTGRES_PASSWORD=teste -e POSTGRES_DB=teste -p 5432:5432 -d postgres
-=======
 ```
 
 ### Criando um ambiente virtual (virtual env)
