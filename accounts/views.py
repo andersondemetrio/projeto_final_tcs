@@ -91,7 +91,7 @@ def enviar_email_cadastro(request):
             settings.DEFAULT_FROM_EMAIL,
             [user_email],
             fail_silently=True,
-            
+
         )
 
         return render(request, 'email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
@@ -116,3 +116,5 @@ def gerar_senha_aleatoria():
     # Gerar a senha
     senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
     return senha
+
+#novo teste
