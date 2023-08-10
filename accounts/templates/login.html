@@ -12,13 +12,13 @@
   </head>
   <body class="d-xl-flex justify-content-xl-center align-items-xl-center" style="background: #F5F5F5;">
     <!-- Start: 1 Row 2 Columns -->
-    <div class="container" style="background: var(--bs-body-bg);height: 100%;margin-top: 90px;width: 1140px;max-width: 1140px;padding-left: 0px;padding-right: 0px;">
-      <div class="row" style="width: 100%;max-width: 1140px;margin-right: 0px;margin-left: 0px;">
-        <div class="col-md-6" style="width: 570px;height: 550px;max-width: 570px;padding-right: 0px;padding-left: 0px;">
-          <div style="height: 550px;width: 100%;background: url('{% static "assets/img/fundo_login.png" %}') center / cover no-repeat;"></div>
+    <div class="container" style="background: var(--bs-body-bg);height: 100%;margin-top: 90px;width: 80%;max-width: 80%;padding-left: 0px;padding-right: 0px;">
+      <div class="row justify-content-center" style="width: 100%;max-width: 100%;margin-right: 0px;margin-left: 0px;">
+        <div class="col-md-6" style="width: 50%;height: 550px;max-width: 50%;padding-right: 0px;padding-left: 0px;min-width: AUTO;">
+          <div class="visible" style="height: 550px;width: 100%;background: url('{% static "assets/img/fundo_login.png" %}') center / cover no-repeat;"></div>
         </div>
-        <div class="col-md-6 d-xl-flex justify-content-xl-center align-items-xl-start" style="border-style: none;height: 550px;width: 570px;max-width: 570px;padding-right: 0px;padding-left: 0px;">
-          <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center flex-lg-column justify-content-lg-center align-items-lg-center align-content-lg-center align-self-lg-center flex-xl-column justify-content-xl-center align-items-xl-center align-content-xl-center align-self-xl-center flex-xxl-column justify-content-xxl-center align-items-xxl-center align-content-xxl-center align-self-xxl-center" style="height: 550px;width: 100%;">
+        <div class="col-md-6" style="border-style: none;height: 550px;width: 50%;max-width: 50%;padding-right: 0px;padding-left: 0px;">
+          <div class="d-flex flex-column justify-content-center align-items-center" style="height: 550px;width: 100%;max-width: 100%;">
             <div style="height: 150px;margin-top: 50px;margin-bottom: 50px;background: url('{% static "assets/img/rprice_logo_280_150.png" %}') center / contain no-repeat;width: 280px;"></div>
                 {% if messages %}
                     {% for message in messages %}
@@ -27,20 +27,27 @@
                 {% endif %}
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
-                    <div style="height: 44px;width: 280px;background: #f9f9f9;border-radius: 5px;margin-bottom: 15px;">
-                        <i class="fa fa-user" style="color: rgb(152,152,152);margin-left: 12px;padding-top: 15px;font-size: 19px;"></i>
-                        <input class="placeholder focus-ring focus-ring-light" type="text" id="username" name="username" style="background: #f9f9f9;margin-left: 10px;color: rgb(152,152,152);width: 220px;height: 36px;padding-bottom: 10px;border-style: none;" placeholder="Matrícula ou CPF" required="" />
-                    </div>
-                    <div class="focus-ring" style="height: 44px;width: 280px;background: #f9f9f9;border-radius: 5px;margin-bottom: 15px;">
-                        <i class="fa fa-lock" style="color: rgb(152,152,152);margin-left: 12px;padding-top: 15px;font-size: 19px;"></i>
-                        <input class="placeholder focus-ring focus-ring-light" type="password" id="password" name="password" style="width: 220px;height: 36px;padding-bottom: 10px;margin-left: 10px;background: #f9f9f9;border-style: none;" placeholder="Senha" required="" />
-                    </div>
-                    <div style="height: 44px; width: 280px; background: #251F4D; border-radius: 5px; margin-bottom: 5px; display: flex; justify-content: center; align-items: center;">
-                        <button type="submit" id="entrar-button" style="color: #ffffff; font-size: 16px; font-weight: bold; text-align: center; border: none; background: none;">Entrar</button>
-                    </div>
-                    <div>
-                        <p style="width: 280px;font-size: 14px;text-align: center;">Esqueceu a senha?</p>
-                    </div>
+                        <div style="height: 44px;width: 280px;background: #f9f9f9;border-radius: 5px;margin-bottom: 15px;">
+                            <i class="fa fa-user" style="color: rgb(152,152,152);margin-left: 12px;padding-top: 15px;font-size: 19px;"></i>
+                            <input class="placeholder focus-ring focus-ring-light" type="text" id="username" name="username" style="background: #f9f9f9;margin-left: 10px;color: rgb(152,152,152);width: 220px;height: 36px;padding-bottom: 10px;border-style: none;" placeholder="Matrícula ou CPF" required="" />
+                        </div>
+                        <div class="focus-ring" style="height: 44px;width: 280px;background: #f9f9f9;border-radius: 5px;margin-bottom: 15px;">
+                            <i class="fa fa-lock" style="color: rgb(152,152,152);margin-left: 12px;padding-top: 15px;font-size: 19px;">                            
+                            </i><input class="placeholder focus-ring focus-ring-light" type="password" id="password" name="password" style="width: 220px;height: 36px;padding-bottom: 10px;margin-left: 10px;background: #f9f9f9;border-style: none;" placeholder="Senha" required="" />
+                        </div>
+                        <div style="height: 44px; width: 280px; background: #251F4D; border-radius: 5px; margin-bottom: 5px; display: flex; justify-content: center; align-items: center;">
+                          <button type="submit" id="entrar-button" style="color: #ffffff; font-size: 16px; font-weight: bold; text-align: center; border: none; background: none;">Entrar</button>
+                        </div>
+                        <div>
+                            <p style="width: 280px;font-size: 14px;text-align: center;margin-bottom: 0px;text-decoration:  underline;">
+                              <a href="{% url 'primeiro_acesso' %}">Primeiro acesso</a>
+                            </p>
+                        </div>
+                        <div>
+                            <p style="width: 280px;font-size: 14px;text-align: center;">
+                              <a href="{% url 'recuperar_senha' %}">Esqueceu a senha?</a>
+                            </p>
+                        </div>
                 </form>
             </div>
         </div>
