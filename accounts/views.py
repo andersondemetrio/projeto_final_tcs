@@ -117,4 +117,16 @@ def gerar_senha_aleatoria():
     senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
     return senha
 
-#novo teste
+# crie uma funcção para validar o email
+
+def validar_email(email):
+    # Verificar se o email é válido
+    if not email:
+        return False
+    # Verificar se o email tem o formato correto
+    if '@' not in email:
+        return False
+    # Verificar se o email tem o formato correto
+    if '.' not in email.split('@')[1]:
+        return False
+    return True
