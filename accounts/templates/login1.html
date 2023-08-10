@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script defer src="/static/js/criar_funcao_aqui.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-left">Uma imagem aqui!!!!!!</div>
+      <div class="container-right">
+        <h1>RPrice</h1>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="instituicao">Instituição:</label>
+            <input type="text" id="instituicao" name="instituicao" required />
+          </div>
+
+          <div class="input-group">
+            <label for="username">Login:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="infos">
+            <p>
+              Primeiro acesso?<a href="{% url 'primeiro_acesso' %}"> Clique aqui</a>
+            </p>
+            <p>
+              Esqueci <a href="{% url 'recuperar_senha' %}">minha senha!</a>
+            </p>
+          </div>
+          <div class="button">
+            <button type="submit">Acessar</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
