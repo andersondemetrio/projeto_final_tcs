@@ -93,7 +93,7 @@ def enviar_email_cadastro(request):
             fail_silently=True,
         )
 
-        return render(request, 'pagina_email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
+        return render(request, 'email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
 
     return render(request, 'enviar_email_cadastro.html', {'mensagem_email': mensagem_email})
 
