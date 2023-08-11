@@ -88,6 +88,8 @@ CREATE TABLE propostas (
 '''
 
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 class Endereco(models.Model):
     cep = models.CharField(max_length=9)
@@ -138,6 +140,7 @@ class Colaboradores(models.Model):
     beneficios = models.DecimalField(max_digits=10, decimal_places=2)
     encargos = models.DecimalField(max_digits=10, decimal_places=2)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class GastosVariaveis(models.Model):
     colaborador = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)

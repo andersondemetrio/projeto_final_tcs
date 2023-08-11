@@ -142,19 +142,21 @@ STATICFILES_DIRS = [
 # Configurações de e-mail para o Outlook
 
 # Configurações de e-mail para o Outlook
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.office365.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'anderson.placido@alunos.sc.senac.br'  # Seu endereço de e-mail do Outlook
-# EMAIL_HOST_PASSWORD = 'Dimitri33'  # Sua senha do e-mail do Outlook
-# DEFAULT_FROM_EMAIL = 'anderson.placido@alunos.sc.senac.br'  # Seu endereço de e-mail do Outlook
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'anderson.placido@alunos.sc.senac.br'  # Seu endereço de e-mail do Outlook
+EMAIL_HOST_PASSWORD = 'Dimitri33'  # Sua senha do e-mail do Outlook
+DEFAULT_FROM_EMAIL = 'anderson.placido@alunos.sc.senac.br'  # Seu endereço de e-mail do Outlook
 
 # Configurações de e-mail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+AUTHENTICATION_BACKENDS = ['dashboard.custom_auth_backends.CustomModelBackend']

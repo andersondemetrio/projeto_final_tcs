@@ -8,9 +8,10 @@ from django.contrib.auth.decorators import login_required
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dashboard.models import Colaboradores
+from django.db.models import Q
 
 import logging
-
 import string
 
 from django.core.mail import send_mail
@@ -52,16 +53,13 @@ def logout_view(request):
     logout(request)
     return redirect('login')  # Redireciona para a página de login após o logout
 
-def landing_page_view(request):
-    return render(request, 'landing_page.html')
-
 def primeiro_acesso(request):
     return render(request, 'primeiro_acesso.html') # Redireciona para a página de primeiro acesso
 
 def recuperar_senha(request):
     return render(request, 'recuperar_senha.html') # Redireciona para a página de recuperar senha
 
-# inclusão da condiguração de envio de e-mail
+# inclusão da configuração de envio de e-mail
 
 logger = logging.getLogger(__name__)
 
@@ -76,12 +74,38 @@ def enviar_email_cadastro(request):
 
     if request.method == 'POST':
         user_email = request.POST.get('email')
+        cpf_or_matricula = request.POST.get('login')
         token = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
         link_cadastro = f'http://127.0.0.1:8000/login'
        # mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro}'
 
-        # use a função gerar_senha_aleatoria para enviar junto com o e-mail de cadastro
+        # Verifica se o cpf ou matrícula informados já estão cadastrados no banco
+        try:
+            colaborador = Colaboradores.objects.get(Q(cpf=cpf_or_matricula) | Q(matricula=cpf_or_matricula))
+        except Colaboradores.DoesNotExist:
+            messages.error(request, 'Colaborador não encontrado.')
+            return render(request, 'primeiro_acesso.html')
+        
+        # Verifica se o e-mail informado já está cadastrado no banco
+        try:
+            User.objects.get(email=user_email)
+            messages.error(request, 'E-mail já cadastrado.')
+            return render(request, 'primeiro_acesso.html')
+        except User.DoesNotExist:
+            pass
+        
+        # Validar se o colaborador já possui um usuário cadastrado
+        if colaborador.usuario:
+            messages.info(request, 'Colaborador já está cadastrado.')
+            return render(request, 'primeiro_acesso.html')
+        
+        # usa a função gerar_senha_aleatoria para enviar junto com o e-mail de cadastro
+        # cria um novo usuário no banco com a senha aleatória gerada
         senha_aleatoria = gerar_senha_aleatoria()
+        novo_usuario = User.objects.create_user(username=cpf_or_matricula, email=user_email, password=senha_aleatoria)
+        colaborador.usuario = novo_usuario
+        colaborador.save()        
+        
         mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro} e sua senha é: {senha_aleatoria}'
        
 
@@ -96,6 +120,7 @@ def enviar_email_cadastro(request):
         return render(request, 'email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
 
     return render(request, 'enviar_email_cadastro.html', {'mensagem_email': mensagem_email})
+
 
 from django.shortcuts import redirect
 
