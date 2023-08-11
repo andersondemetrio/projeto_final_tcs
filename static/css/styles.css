@@ -148,4 +148,12 @@ body.dashboard-body {
    .button:active {
     filter: brightness(.8);
    }
+ .user-greeting {
+        background-color: #f8f9fa;
+        border: 1px solid #d1d3e2;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #333;
+    }
    

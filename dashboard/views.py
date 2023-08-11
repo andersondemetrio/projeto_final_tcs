@@ -20,6 +20,6 @@ import random
 @login_required
 def dashboard_view(request):
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
+        return render(request, 'dashboard1.html')
     else:
         return render(request, 'account/login.html', context)

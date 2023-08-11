@@ -11,7 +11,7 @@ class CustomModelBackend(ModelBackend):
         # Verifica o usuário no banco para verificar se o username corresponde a um cpf ou matricula no model Colaboradores
         # Se encontrado um usuário, verifica se a senha corresponde a senha do usuário encontrado
         try:
-            user = UserModel._default_manager.get(Q(colaboradores__cpf=username) | Q(colaboradores__matricula=username))
+            user = UserModel._default_manager.get(Q(username=username) | Q(colaboradores__matricula=username))
             if user.check_password(password):
                 return user
         except UserModel.DoesNotExist:
