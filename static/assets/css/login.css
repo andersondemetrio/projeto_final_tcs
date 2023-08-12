@@ -1,0 +1,329 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.fundo {
+  background: #F5F5F5;
+}
+
+.container {
+  background: #ffffff;
+  height: 100%;
+  margin: 90px;
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.row {
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.div-left {
+  width: 50%;
+  height: 550px;
+  max-width: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
+  min-width: AUTO;
+}
+
+.div-left-img {
+  height: 550px;
+  width: 100%;
+  background: url("../../assets/img/fundo_login.png") center / cover no-repeat;
+}
+
+.div-right {
+  border-style: none;
+  height: 550px;
+  width: 50%;
+  max-width: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.div-right-int {
+  height: 550px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.div-right-logo {
+  height: 150px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  background: url("../../assets/img/rprice_logo_280_150.png") center / contain no-repeat;
+  width: 280px;
+}
+
+.div-right-input {
+  height: 44px;
+  width: 280px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.fa.fa-user {
+  color: rgb(152,152,152);
+  margin-left: 12px;
+  padding-top: 15px;
+  font-size: 19px;
+}
+
+.fa.fa-lock {
+  color: rgb(152,152,152);
+  margin-left: 12px;
+  padding-top: 15px;
+  font-size: 19px;
+}
+
+.placeholder.focus-ring.focus-ring-light {
+  background: #f9f9f9;
+  margin-left: 10px;
+  color: rgb(152,152,152);
+  width: 220px;
+  height: 36px;
+  padding-bottom: 10px;
+  border-style: none;
+}
+
+.form-login {
+  height: 550px;
+  width: 100%;
+  max-width: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.div-right-int {
+  height: 550px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.div-logo {
+  height: 150px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  background: url("../../assets/img/rprice_logo_280_150.png") center / contain no-repeat;
+  width: 280px;
+}
+
+.div-right-input {
+  height: 44px;
+  width: 280px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.fa.fa-user {
+  color: rgb(152,152,152);
+  margin-left: 12px;
+  padding-top: 15px;
+  font-size: 19px;
+}
+
+.fa.fa-lock {
+  color: rgb(152,152,152);
+  margin-left: 12px;
+  padding-top: 15px;
+  font-size: 19px;
+}
+
+.fa.fa-eye-slash {
+  color: rgb(152,152,152);
+  margin-right: 0px;
+  padding-top: 15px;
+  font-size: 15px;
+}
+
+.fa.fa-eye {
+  color: rgb(152,152,152);
+  margin-right: 0px;
+  padding-top: 15px;
+  font-size: 15px;
+}
+
+.placeholder.focus-ring.focus-ring-light {
+  background: #f9f9f9;
+  margin-left: 10px;
+  color: rgb(152,152,152);
+  width: 220px;
+  height: 36px;
+  padding-bottom: 10px;
+  border-style: none;
+}
+
+.btn-button {
+  height: 44px;
+  width: 280px;
+  background: #251F4D;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-login {
+  color: #ffffff;
+  width: 280px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none; 
+  background: none;
+}
+
+.text-esqueceu-senha {
+  width: 280px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.text-primeiro-acesso {
+  width: 280px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+/* Estilização tela primeiro acesso */
+
+.div-column {
+  border-style: none;
+  height: 550px;
+  width: 100%;
+  max-width: 100%;  
+  background: #ffffff;
+  min-width: auto;
+}
+
+.div-back-login {
+  width: 100%;
+  margin-left: 0px;
+  height: 36px;
+  text-decoration: none;
+}
+
+.p-back-login {
+  width: 100px;
+  color: rgb(152,152,152);
+  padding-left: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.link-first-access {
+  text-decoration: none;
+}
+
+.fa.fa-mail-reply {
+  color: rgb(152,152,152);
+  padding-left: 20px;
+  width: 36px;
+  height: 24px;
+}
+
+.div-title-text {
+  height: 44px;
+  width: 350px;
+  background: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.p-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.p-text {
+  font-size: 14px;
+  width: 350px;
+  text-align: center;
+}
+
+.div-input {
+  height: 44px;
+  width: 280px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.margin-botton {
+  margin-top: 15px;
+}
+
+.fa.fa-envelope {
+  color: rgb(152,152,152);
+  margin-left: 12px;
+  padding-top: 15px;
+  font-size: 19px;
+}
+
+/* Estilização tela recuperar senha */
+
+.div-title-text-rec {
+  height: 44px;
+  width: 350px;
+  background: #ffffff;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* Estilização tela e-mail enviado */
+
+.input-email-env {
+  height: 44px;
+  width: 350px;
+  background: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.p-success {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.p-maior {
+  font-size: 14px;
+  width: 350px;
+  text-align: center;
+  height: 60px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.p-menor {
+  font-size: 14px;
+  width: 350px;
+  text-align: center;
+  height: 24px;
+  padding-bottom: 0px;
+  margin-bottom: 80px;
+}
+
+.div-back-login-env {
+  width: 100%;
+  margin-left: 0px;
+  margin-top: 30px;
+  height: 36px;
+  text-decoration: none;
+}

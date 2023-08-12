@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 {% load static %}
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -5,32 +6,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>email_enviado</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    <script src="{% static 'assets/js/criar_funcao_aqui.js' %}"></script>
+    {% bootstrap_css %}
+    {% comment %} <script src="{% static 'assets/js/jquery.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
   </head>
-  <body style="background: #F5F5F5;">
-    <!-- Start: 1 Row 1 Column -->
-    <div class="container" style="width: 100%;height: 100%;padding-right: 0px;padding-left: 0px;margin-top: 90px;min-width: auto;max-width: 100%;margin-right: 0px;margin-left: 0px;">
-      <div class="row justify-content-center" style="width: 100%;max-width: 100%;margin-right: 0px;margin-left: 0px;min-width: auto;">
-        <div class="col-md-6" style="border-style: none;height: 550px;width: 80%;max-width: 80%;padding-right: 0px;padding-left: 0px;min-width: auto;">
-          <div class="focus-ring focus-ring-light d-flex flex-column justify-content-evenly align-items-center" style="height: 450px;width: 100%;background: #ffffff;max-width: 100%;min-width: auto;">
-            <div style="height: 150px;margin-top: 50px;margin-bottom: 50px;background: url('{% static "assets/img/rprice_logo_280_150.png" %}') center / contain no-repeat;width: 280px;"></div>
-            <div style="height: 44px;width: 350px;background: #ffffff;border-radius: 5px;margin-bottom: 15px;">
-              <p style="text-align: center;font-size: 26px;font-weight: bold;margin-bottom: 20px;">E-mail enviado com sucesso!</p>
-              <p style="font-size: 14px;width: 350px;text-align: center;height: 60px;padding-bottom: 0px;margin-bottom: 0px;">Um e-mail com uma senha provisória foi enviada para o endereço de e-mail informado. Lembre-se de alterá-la no próximo Login no sistema.&nbsp;</p>
-              <p style="font-size: 14px;width: 350px;text-align: center;height: 24px;padding-bottom: 0px;margin-bottom: 0px;">A senha é de uso pessoal e intransferível.</p>
+  <body class="fundo">
+    <div class="container pl-0 pr-0">
+      <div class="row justify-content-center pl-0 pr-0 no-gutters">
+        <div class="div-column">
+          <div class="d-flex flex-column justify-content-between align-items-center pl-0 pr-0">
+            <div class="d-flex div-back-login-env">
+              <a class="d-flex flex-row" href="{% url 'login' %}">
+                <i class="fa fa-mail-reply"></i>
+                <p class="p-back-login">Voltar</p>
+              </a>
             </div>
-            <div class="d-flex justify-content-center" style="width: 100%;margin-left: 0px;height: 36px;margin-top: 150px;">
-                <a href="{% url 'login' %}" style="text-decoration: none; color: rgb(152, 152, 152); display: flex; align-items: center;">
-                    <i class="fa fa-mail-reply" style="color: rgb(152, 152, 152); padding-left: 20px; width: 36px; height: 24px;"></i>
-                    <p style="width: 100px; padding-left: 10px; padding-bottom: 0px; margin-bottom: 0px;">Voltar</p>
-                  </a>
+            <div class="div-logo"></div>
+            <div class="input-email-env">
+              <p class="p-success">E-mail enviado com sucesso!</p>
+              <p class="p-maior">Um e-mail com uma senha provisória foi enviada para o endereço de e-mail informado. Lembre-se de alterá-la no próximo Login no sistema.&nbsp;</p>
+              <p class="p-menor">A senha é de uso pessoal e intransferível.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- End: 1 Row 1 Column -->
   </body>
 </html>
