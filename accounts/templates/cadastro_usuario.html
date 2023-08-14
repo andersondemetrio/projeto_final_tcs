@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="d-xl-flex justify-content-xl-center align-items-xl-center" style="background: #F5F5F5;">
+    <!-- Start: 1 Row 2 Columns -->
+    <div class="container" style="background: var(--bs-body-bg); height: 100%; margin-top: 90px; width: 80%; max-width: 80%; padding-left: 0px; padding-right: 0px;">
+        <div class="row justify-content-center" style="width: 100%; max-width: 100%; margin-right: 0px; margin-left: 0px;">
+            <div class="col-md-6" style="width: 50%; height: 550px; max-width: 50%; padding-right: 0px; padding-left: 0px; min-width: AUTO;">
+                <div class="visible" style="height: 550px; width: 100%; background: url('{% static "assets/img/fundo_login.png" %}') center / cover no-repeat;"></div>
+            </div>
+            <div class="col-md-6" style="border-style: none; height: 550px; width: 50%; max-width: 50%; padding-right: 0px; padding-left: 0px;">
+                <div class="d-flex flex-column justify-content-center align-items-center" style="height: 550px; width: 100%; max-width: 100%;">
+                    <div style="height: 150px; margin-top: 50px; margin-bottom: 50px; background: url('{% static "assets/img/rprice_logo_280_150.png" %}') center / contain no-repeat; width: 280px;"></div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nome de Usuário:</label>
+                            <input class="placeholder focus-ring focus-ring-light form-control" type="text" id="username" name="username" style="background: #f9f9f9;margin-left: 10px;color: rgb(152,152,152);width: 220px;height: 36px;padding-bottom: 10px;border-style: none;" placeholder="Matrícula ou CPF" required="" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha:</label>
+                            <input class="placeholder focus-ring focus-ring-light form-control" type="password" id="password" name="password" style="width: 220px;height: 36px;padding-bottom: 10px;margin-left: 10px;background: #f9f9f9;border-style: none;" placeholder="Senha" required="" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">Primeiro Nome:</label>
+                            <input class="placeholder focus-ring focus-ring-light form-control" type="text" id="first_name" name="first_name" style="background: #f9f9f9;margin-left: 10px;color: rgb(152,152,152);width: 220px;height: 36px;padding-bottom: 10px;border-style: none; " />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Último Nome:</label>
+                            <input class="placeholder focus-ring focus-ring-light form-control" type="text" id="last_name" name="last_name" style="background: #f9f9f9;margin-left: 10px;color: rgb(152,152,152);width: 220px;height: 36px;padding-bottom: 10px;border-style: none;" />
+                        </div>
+
+                        {% if error_message %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error_message }}
+                        </div>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End: 1 Row 2 Columns -->
+</body>
+</html>

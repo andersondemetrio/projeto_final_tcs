@@ -14,7 +14,7 @@ import random
 import logging
 import string
 from django.contrib.auth.views import PasswordResetView
-
+from django.db.utils import IntegrityError
 
 from django.core.mail import send_mail
 
@@ -170,3 +170,24 @@ def redirect_to_custom_login(request):
     if next_url:
         return redirect(f'/login/?next={next_url}')
     return redirect('/login/')
+
+# Cadastro dos usuários no django
+
+def cadastro(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+
+        try:
+            user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
+            user.save()
+            return redirect('cadastro_usuario_sucesso')  # Redirecionar para a página de sucesso
+        except IntegrityError:  # Handle the case when a user with the same username already exists
+            return render(request, 'cadastro_usuario.html', {'error_message': 'Usuário já existe'})
+
+    return render(request, 'cadastro_usuario.html')
+
+def cadastro_usuario_sucesso(request):
+    return render(request, 'cadastro_usuario_sucesso.html')

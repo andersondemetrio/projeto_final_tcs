@@ -16,6 +16,8 @@ urlpatterns = [
         success_url='/redefinir_concluido/'), 
         name='password_reset_confirm'),
     path('redefinir_concluido/', auth_views.PasswordResetCompleteView.as_view(template_name='redefinir_concluido.html'), name='password_reset_complete'),
+    path('cadastro_usuario/',cadastro, name='cadastro_usuario'),
+    path('cadastro_usuario_sucesso/', cadastro_usuario_sucesso, name='cadastro_usuario_sucesso'),
     # path('email_recuperado/', email_recuperado, name='email_recuperado'),
     # outras rotas do seu aplicativo aqui
     #teste
