@@ -18,4 +18,5 @@ urlpatterns = [
     path('redefinir_concluido/', auth_views.PasswordResetCompleteView.as_view(template_name='redefinir_concluido.html'), name='password_reset_complete'),
     # path('email_recuperado/', email_recuperado, name='email_recuperado'),
     # outras rotas do seu aplicativo aqui
+    #teste
 ]
