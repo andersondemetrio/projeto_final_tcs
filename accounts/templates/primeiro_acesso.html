@@ -1,0 +1,59 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>tela_cadastro</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    {% bootstrap_css %}
+    {% comment %} <script src="{% static 'assets/js/jquery.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
+</head>
+
+<body class="fundo">
+    <div class="container pl-0 pr-0">
+        <div class="row justify-content-center pl-0 pr-0 no-gutters">
+            <div class="d-flex flex-column justify-content-center align-items-center pl-0 pr-0">
+                <div class="d-flex flex-column justify-content-center align-items-center pl-0 pr-0 div-column">
+                    <div class="d-flex div-back-login">
+                        <a class="d-flex flex-row" href="{% url 'login' %}">
+                            <i class="fa fa-mail-reply"></i>
+                            <p class="p-back-login">Voltar</p>
+                        </a>
+                    </div>
+                    <div class="div-logo"></div>
+                    <div class="div-title-text">
+                        <p class="p-title">Bem vindo!</p>
+                        <p class="p-text">Uma senha provisória será enviada para seu E-mail.</p>
+                    </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'enviar_email_cadastro' %}" method="post">
+                        {% csrf_token %}
+                            <div class="focus-ring div-input-first-access div-input">
+                                <i class="fa fa-user"></i>
+                                <input class="placeholder focus-ring focus-ring-light" type="text" id="login" name="login" placeholder="Matrícula ou CPF" required="">
+                            </div>
+                            <div class="focus-ring div-input-first-access div-input">
+                                <i class="fa fa-envelope"></i>
+                                <input class="placeholder focus-ring focus-ring-light" type="text" id="email" name="email" placeholder="Informe seu e-mail" required="">
+                            </div>
+                            <div class="btn-button margin-botton">
+                                <button class="btn-login" type="submit" id="entrar-button">Enviar</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

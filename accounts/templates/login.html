@@ -1,0 +1,62 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>tela_login</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    <script src="{% static 'assets/js/criar_funcao_aqui.js' %}"></script>
+    {% bootstrap_css %}
+    {% comment %} <script src="{% static 'assets/js/jquery.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
+  </head>
+
+  <body class="fundo">
+    <div class="container pl-0 pr-0">
+      <div class="row justify-content-center pl-0 pr-0 no-gutters">
+        <div class="col-md-6 div-left pl-0 pr-0">
+          <div class="visible div-left-img"></div>
+        </div>
+        <div class="col-md-6 div-right pl-0 pr-0">
+          <div class="d-flex flex-column justify-content-center align-items-center div-right-int">
+            <form class="d-flex flex-column justify-content-center align-items-center form-login" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+            <div class="div-logo"></div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+                    <div class="div-right-input">
+                        <i class="fa fa-user"></i>
+                        <input class="placeholder focus-ring focus-ring-light" type="text" id="username" name="username" placeholder="Matrícula ou CPF" required="" />
+                    </div>
+                    <div class="focus-ring div-right-input">
+                        <i class="fa fa-lock"></i>
+                        <input class="placeholder focus-ring focus-ring-light" type="password" id="password" name="password" placeholder="Senha" required="" />
+                        <i class="fa fa-eye-slash toggle-password" id="toggle-password"></i>
+                    </div>
+                    <div class="btn-button">
+                      <button class="btn-login" type="submit" id="entrar-button">Entrar</button>
+                    </div>
+                    <div>
+                        <p class="text-primeiro-acesso">
+                            <a href="{% url 'primeiro_acesso' %}">Primeiro acesso</a>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-esqueceu-senha">
+                            <a href="{% url 'reset_password' %}">Esqueceu a senha?</a>
+                        </p>
+                    </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

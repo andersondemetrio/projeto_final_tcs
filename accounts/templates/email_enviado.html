@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>email_enviado</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    <script src="{% static 'assets/js/criar_funcao_aqui.js' %}"></script>
+    {% bootstrap_css %}
+    {% comment %} <script src="{% static 'assets/js/jquery.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
+  </head>
+  <body class="fundo">
+    <div class="container pl-0 pr-0">
+      <div class="row justify-content-center pl-0 pr-0 no-gutters">
+        <div class="div-column">
+          <div class="d-flex flex-column justify-content-between align-items-center pl-0 pr-0">
+            <div class="d-flex div-back-login-env">
+              <a class="d-flex flex-row" href="{% url 'login' %}">
+                <i class="fa fa-mail-reply"></i>
+                <p class="p-back-login">Voltar</p>
+              </a>
+            </div>
+            <div class="div-logo"></div>
+            <div class="input-email-env">
+              <p class="p-success">E-mail enviado com sucesso!</p>
+              <p class="p-maior">Um e-mail com uma senha provisória foi enviada para o endereço de e-mail informado. Lembre-se de alterá-la no próximo Login no sistema.&nbsp;</p>
+              <p class="p-menor">A senha é de uso pessoal e intransferível.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
