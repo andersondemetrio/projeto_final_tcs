@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound
 from django.core.mail import EmailMessage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -10,13 +9,14 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dashboard.models import Colaboradores
 from django.db.models import Q
-
-import logging
-import string
-
-from django.core.mail import send_mail
 from django.conf import settings
 import random
+import logging
+import string
+from django.contrib.auth.views import PasswordResetView
+
+
+from django.core.mail import send_mail
 
 
 logger = logging.getLogger(__name__)
@@ -63,80 +63,105 @@ def recuperar_senha(request):
 
 logger = logging.getLogger(__name__)
 
-logger = logging.getLogger(__name__)
-
-
 def enviar_email_cadastro(request):
-    logger = logging.getLogger('django')  # Crie um logger com o nome 'django'
-    
-    logger.setLevel(logging.DEBUG)
-    mensagem_email = ''  # Inicializa a variável mensagem_email com uma string vazia
-
     if request.method == 'POST':
         user_email = request.POST.get('email')
         cpf_or_matricula = request.POST.get('login')
-        token = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
-        link_cadastro = f'http://127.0.0.1:8000/login'
-       # mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro}'
+        
+        colaborador = buscar_colaborador(cpf_or_matricula)
+        if not colaborador:
+            return colaborador_nao_encontrado(request)
 
-        # Verifica se o cpf ou matrícula informados já estão cadastrados no banco
-        try:
-            colaborador = Colaboradores.objects.get(Q(cpf=cpf_or_matricula) | Q(matricula=cpf_or_matricula))
-        except Colaboradores.DoesNotExist:
-            messages.error(request, 'Colaborador não encontrado.')
-            return render(request, 'primeiro_acesso.html')
-        
-        # Verifica se o e-mail informado já está cadastrado no banco
-        try:
-            User.objects.get(email=user_email)
-            messages.error(request, 'E-mail já cadastrado.')
-            return render(request, 'primeiro_acesso.html')
-        except User.DoesNotExist:
-            pass
-        
-        # Validar se o colaborador já possui um usuário cadastrado
+        if usuario_ja_cadastrado(user_email):
+            return email_ja_cadastrado(request)
+
         if colaborador.usuario:
-            messages.info(request, 'Colaborador já está cadastrado.')
-            return render(request, 'primeiro_acesso.html')
+            return colaborador_ja_cadastrado(request)
+
+        senha_aleatoria = gerar_e_cadastrar_senha(colaborador, cpf_or_matricula, user_email)
+        enviar_email_colaborador(user_email, senha_aleatoria)
         
-        # usa a função gerar_senha_aleatoria para enviar junto com o e-mail de cadastro
-        # cria um novo usuário no banco com a senha aleatória gerada
-        senha_aleatoria = gerar_senha_aleatoria()
-        novo_usuario = User.objects.create_user(username=cpf_or_matricula, email=user_email, password=senha_aleatoria)
-        colaborador.usuario = novo_usuario
-        colaborador.save()        
-        
-        mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro} e sua senha é: {senha_aleatoria}'
-       
+        return render(request, 'email_enviado.html')
 
-        send_mail(
-            'Conclua seu cadastro no RPrice',
-            mensagem_email,
-            settings.DEFAULT_FROM_EMAIL,
-            [user_email],
-            fail_silently=True,
-        )
+    return render(request, 'enviar_email_cadastro.html')
 
-        return render(request, 'email_enviado.html')  # Renderiza o template 'pagina_email_enviado.html'
+def enviar_email_colaborador(user_email, senha):
+    link_cadastro = f'http://127.0.0.1:8000/login'
+    mensagem_email = f'Olá! Você pode concluir seu cadastro no RPrice clicando no seguinte link: {link_cadastro} e sua senha é: {senha}'
 
-    return render(request, 'enviar_email_cadastro.html', {'mensagem_email': mensagem_email})
+    send_mail(
+        'Conclua seu cadastro no RPrice',
+        mensagem_email,
+        settings.DEFAULT_FROM_EMAIL,
+        [user_email],
+        fail_silently=True,
+    )
+
+def buscar_colaborador(cpf_or_matricula):
+    try:
+        return Colaboradores.objects.get(Q(cpf=cpf_or_matricula) | Q(matricula=cpf_or_matricula))
+    except Colaboradores.DoesNotExist:
+        return None
+
+def colaborador_nao_encontrado(request):
+    messages.error(request, 'Colaborador não encontrado.')
+    return render(request, 'primeiro_acesso.html')
+
+def usuario_ja_cadastrado(user_email):
+    try:
+        User.objects.get(email=user_email)
+        return True
+    except User.DoesNotExist:
+        return False
+
+def email_ja_cadastrado(request):
+    messages.error(request, 'E-mail já cadastrado.')
+    return render(request, 'primeiro_acesso.html')
+
+def colaborador_ja_cadastrado(request):
+    messages.info(request, 'Colaborador já está cadastrado.')
+    return render(request, 'primeiro_acesso.html')
+
+def gerar_e_cadastrar_senha(colaborador, cpf_or_matricula, user_email):
+    senha_aleatoria = gerar_senha_aleatoria()
+    novo_usuario = User.objects.create_user(username=cpf_or_matricula, email=user_email, password=senha_aleatoria)
+    colaborador.usuario = novo_usuario
+    colaborador.save()
+    return senha_aleatoria
 
 
-from django.shortcuts import redirect
+# class CustomPasswordResetView(PasswordResetView):
+#     email_template_name = 'registration/password_reset_email.html'
+#     template_name = 'registration/password_reset_form.html'
+#     success_url = 'email_recuperado'
+
+def redefinir_senha(request):
+    return render(request, 'redefinir_senha.html')
+    
+def recuperar_senha(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = validar_email(email)
+        if user:
+            PasswordResetView.as_view(
+                template_name='registration/password_reset_form.html',  # Seu template de redefinição de senha
+                email_template_name='registration/password_reset_email.html',  # Seu template de email
+                success_url='email_recuperado'  # Nome da URL ou path para a página de confirmação
+            )(request)
+        else:
+            messages.error(request, 'O E-mail não foi encontrado.')
+            return render(request, 'recuperar_senha.html')
+    return render(request, 'email_recuperado.html')
+
+def validar_email(email):
+    try:
+        user = User.objects.get(email=email)
+        return user
+    except User.DoesNotExist:
+        return None
 
 def redirect_to_custom_login(request):
     next_url = request.GET.get('next', '')
     if next_url:
         return redirect(f'/login/?next={next_url}')
     return redirect('/login/')
-
-# crie uma função para gerar senha aleatória
-
-def gerar_senha_aleatoria():
-    # Definir todos os caracteres que serão usados para gerar a senha
-    caracteres = string.ascii_letters + string.digits
-    # Definir o tamanho da senha
-    tamanho = random.randint(8, 16)
-    # Gerar a senha
-    senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
-    return senha

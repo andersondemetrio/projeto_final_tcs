@@ -111,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -137,9 +137,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# settings.py
-
 # Configurações de e-mail para o Outlook
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Configurações de e-mail para o Outlook
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -159,4 +158,6 @@ DEFAULT_FROM_EMAIL = 'anderson.placido@alunos.sc.senac.br'  # Seu endereço de e
 # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-AUTHENTICATION_BACKENDS = ['dashboard.custom_auth_backends.CustomModelBackend']
+AUTHENTICATION_BACKENDS = [
+    'dashboard.custom_auth_backends.CustomModelBackend'
+]

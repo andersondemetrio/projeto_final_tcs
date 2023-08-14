@@ -1,0 +1,60 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>tela_cadastro</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    {% bootstrap_css %}
+    <script src="{% static 'assets/js/criar_funcao_aqui.js' %}"></script>
+    {% comment %} <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> {% endcomment %}
+</head>
+
+<body class="fundo">
+    <div class="container pl-0 pr-0">
+        <div class="row justify-content-center pl-0 pr-0 no-gutters">
+            <div class="d-flex flex-column justify-content-center align-items-center pl-0 pr-0">
+                <div class="d-flex flex-column justify-content-center align-items-center pl-0 pr-0 div-column">
+                    {% if validlink %}
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <div class="div-logo"></div>
+                            <div class="div-title-text-rec">
+                                <p class="p-title">Redefinição de Senha</p>
+                                <p class="p-text-rec">Guarde sua nova senha.</p>
+                            </div>
+                            <form method="post">
+                                <div style="display:none">
+                                    <input type="hidden" value="{{ csrf_token }}" name="csrfmiddlewaretoken">
+                                </div>
+                                <div>
+                                    <small id="password1Error" class="error-message" style="color: red;"></small><br>                            
+                                    <small id="password2Error" class="error-message" style="color: red;"></small>
+                                    <div class="d-flex flex-row justify-content-between align-items-center">
+                                        <label for="id_new_password1">Nova Senha</label>
+                                        {{ form.new_password1 }}
+                                    </div>
+                                    <div class="d-flex flex-row justify-content-between align-items-center">
+                                        <label for="id_new_password2">Repita a Senha</label>
+                                        {{ form.new_password2 }}
+                                    </div>
+                                    <div class="btn-button-redefinir margin-botton">
+                                        <button class="btn-redefinir" type="submit" id="entrar-button">Redefinir Senha</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                            <h1>Redefinição de Senha Falhou</h1>
+                            <p>O link de redefinição de senha era inválido, possivelmente porque já foi utilizado. Por favor, solicite uma nova redefinição de senha.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

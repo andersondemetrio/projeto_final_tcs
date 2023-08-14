@@ -26,23 +26,24 @@
               </a>
             </div>
             <div class="div-logo"></div>
-            <div class="div-title-text-rec">
+            <div class="div-title-text">
               <p class="p-title">Esqueceu a senha?&nbsp;</p>
               <p class="p-text">Uma redefinição de senha será encaminhada para você</p>
             </div>
-            {% if messages %}
+            <form method="post" action="{% url 'recuperar_senha' %}">
+              {% csrf_token %}
+              {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-danger">{{ message }}</div>
+                  <div class="alert alert-danger">{{ message }}</div>
                 {% endfor %}
-            {% endif %}
-            <form method="post">
-                {% csrf_token %}
-                    <div class="focus-ring .div-input">
-                        <i class="fa fa-envelope"></i><input class="placeholder focus-ring focus-ring-light" type="text" placeholder="Informe seu e-mail" required="" />
-                    </div>
-                    <div class="btn-button margin-botton">
-                      <button class="btn-login" type="submit" id="entrar-button">Recuperar senha</button>
-                    </div>
+              {% endif %}
+                  <div class="focus-ring div-input-first-access div-input">
+                    <i class="fa fa-envelope"></i>
+                    <input class="placeholder focus-ring focus-ring-light" type="text" id="email" name="email" placeholder="Informe seu e-mail" required="">
+                  </div>
+                  <div class="btn-button margin-botton">
+                    <button class="btn-login" type="submit" id="entrar-button">Recuperar senha</button>
+                  </div>
             </form>
           </div>
         </div>

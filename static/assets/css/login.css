@@ -242,6 +242,8 @@
   margin-bottom: 15px;
 }
 
+
+
 .p-title {
   text-align: center;
   font-size: 14px;
@@ -326,4 +328,39 @@
   margin-top: 30px;
   height: 36px;
   text-decoration: none;
+}
+
+/* Estilização tela redefinir senha */
+
+.div-title-text-rec {
+  height: 44px;
+  width: 280px;
+  background: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.p-text-rec {
+  font-size: 14px;
+  width: 280px;
+  text-align: center;
+}
+
+.btn-button-redefinir {
+  height: 44px;
+  width: 291px;
+  background: #251F4D;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.btn-redefinir {
+  color: #ffffff;
+  width: 291px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none; 
+  background: none;
 }
