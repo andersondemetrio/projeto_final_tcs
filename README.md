@@ -29,10 +29,13 @@ python -m venv venv .
 venv\Scripts\activate
 
 # faça a instalação das dependencias listadas no arquivo requirements.txt
-pip -r install requirements.txt
+pip  install -r requirements.txt
 
 # Faça a migração da aplicação
 python manage.py migrate
+
+# Se houver problemas com as instalações, instale 
+pip install python-decouple
 
 # inicie o serviço
 

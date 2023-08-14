@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dashboard.models import Colaboradores
 from django.db.models import Q
+from django.db.utils import IntegrityError
 
 import logging
 import string
@@ -140,3 +141,24 @@ def gerar_senha_aleatoria():
     # Gerar a senha
     senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
     return senha
+
+# Cadastro dos usuários no django
+
+def cadastro(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+
+        try:
+            user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
+            user.save()
+            return redirect('cadastro_usuario_sucesso')  # Redirecionar para a página de sucesso
+        except IntegrityError:  # Handle the case when a user with the same username already exists
+            return render(request, 'cadastro_usuario.html', {'error_message': 'Usuário já existe'})
+
+    return render(request, 'cadastro_usuario.html')
+
+def cadastro_usuario_sucesso(request):
+    return render(request, 'cadastro_usuario_sucesso.html')
