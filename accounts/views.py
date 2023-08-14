@@ -59,7 +59,7 @@ def primeiro_acesso(request):
 def recuperar_senha(request):
     return render(request, 'recuperar_senha.html') # Redireciona para a página de recuperar senha
 
-# inclusão da configuração de envio de e-mail
+# Primeiro acesso e inclusão da configuração de envio de e-mail
 
 logger = logging.getLogger(__name__)
 
@@ -129,11 +129,16 @@ def gerar_e_cadastrar_senha(colaborador, cpf_or_matricula, user_email):
     colaborador.save()
     return senha_aleatoria
 
+def gerar_senha_aleatoria():
+    # Definir todos os caracteres que serão usados para gerar a senha
+    caracteres = string.ascii_letters + string.digits
+    # Definir o tamanho da senha
+    tamanho = random.randint(8, 16)
+    # Gerar a senha
+    senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
+    return senha
 
-# class CustomPasswordResetView(PasswordResetView):
-#     email_template_name = 'registration/password_reset_email.html'
-#     template_name = 'registration/password_reset_form.html'
-#     success_url = 'email_recuperado'
+# Redefinições de senha
 
 def redefinir_senha(request):
     return render(request, 'redefinir_senha.html')
