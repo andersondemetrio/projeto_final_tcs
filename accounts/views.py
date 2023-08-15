@@ -181,7 +181,7 @@ def cadastro(request):
         last_name = request.POST['last_name']
 
         try:
-            user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
+            user = User.objects.create_superuser(username=username, password=password, first_name=first_name, last_name=last_name)
             user.save()
             return redirect('cadastro_usuario_sucesso')  # Redirecionar para a página de sucesso
         except IntegrityError:  # Handle the case when a user with the same username already exists
