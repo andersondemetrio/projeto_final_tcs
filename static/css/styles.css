@@ -157,3 +157,53 @@ body.dashboard-body {
         color: #333;
     }
    
+    
+    .custom-checkbox {
+        display: inline-block;
+        position: relative;
+        padding-left: 28px;
+        cursor: pointer;
+        font-size: 18px;
+        user-select: none;
+    }
+    
+    /* Estilo do marcador do checkbox */
+    .custom-checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    /* Estilize o marcador do checkbox quando o checkbox estiver marcado */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background-color: #fff;
+        border: 2px solid #2196F3;
+        border-radius: 4px;
+    }
+    
+    /* Estilize o marcador do checkbox quando o usuário passa o mouse */
+    .custom-checkbox:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+    
+    /* Estilize o marcador do checkbox quando o checkbox estiver marcado */
+    .custom-checkbox input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+    
+    /* Estilize a marca dentro do marcador do checkbox */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    
+    /* Estilize a marca quando o checkbox estiver marcado */
+    .custom-checkbox input:checked ~ .checkmark:after {
+        display: block;
+    }
