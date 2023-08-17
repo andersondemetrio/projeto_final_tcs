@@ -1,202 +1,133 @@
+{% load bootstrap4 %}
 {% load static %}
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="pt-br">
+<html data-bs-theme="light" lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>DashBoard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Página inicial</title>
+    <link rel="stylesheet" href="{% static 'assets/css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body style="background: #F5F5F5;">
-    <!-- Start: Sidebar + Content -->
-    <div class="container-fluid" style="padding-right: 0px; padding-left: 0px; margin-top: 90px;">
-        <div class="row">
-            <!-- Start: Sidebar -->
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <div style="height: 150px;margin-top: 50px;margin-bottom: 50px;background: url('{% static "assets/img/rprice_logo_280_150.png" %}') center / contain no-repeat;width: 280px;"></div>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">Menu</span>
-                            <ul class="nav flex-column pl-3">
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalDespesasFixas">
-                                        Despesa Fixas
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalMaoDeObra">
-                                        Mão de Obra
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalCadastros">
-                                        Cadastros
-                                    </a>
-                                </li>
-                                <!-- Add Precificação -->
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalPrecificacao">
-                                        Precificação
-                                    </a>
-                                </li>
-                                <!-- Add Relatórios -->
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalRelatorios">
-                                        Relatórios
-                                    </a>
-                                </li>
-                                <!-- Add Horas Produtivas -->
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="modal" href="#modalHorasProdutivas">
-                                        Horas Produtivas
-                                    </a>
-                                </li>
-                                <!-- Add Sair -->
-                                <li class="nav-item ml-auto">
-                                    <a class="nav-link" href="{% url 'logout' %}">
-                                        <i class="fa fa-sign-out"></i>
-                                        Sair
-                                    </a>
-                                </li>
-                                
-                                <!-- ... rest of your menu items ... -->
-                            </ul>
-                        </li>
-                        <!-- ... rest of your sidebar ... -->
-                    </ul>
-                </div>
-            </nav>
-            
-            <!-- End: Sidebar -->
-            <!-- Start: Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <!-- Conteúdo principal aqui -->
-                <div class="text-end mt-2">
-                    <div class="user-greeting">
-                        <i class="fa fa-user"></i>
-                        <p>Bem-vindo ao Dashboard, {{ user.username }}</p>
-                    </div>
-                </div>
-            </main>
-            <!-- End: Content -->
-        </div>
-    </div>
-    <!-- End: Sidebar + Content -->
-
-    <!-- Modal para inserir gastos fixos -->
-    <div class="modal fade" id="modalDespesasFixas" tabindex="-1" aria-labelledby="modalDespesasFixasLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalDespesasFixasLabel">Cadastrar Despesa Fixa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{% url 'inserir_gasto_fixo' %}">
-                        {% csrf_token %}
-                        <div class="despesa-container">
-                            <div class="mb-3">
-                                <label for="descricao" class="form-label">Descrição</label>
-                                <input type="text" class="form-control" name="descricao" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="valor" class="form-label">Valor</label>
-                                <input type="number" class="form-control" name="valor" step="0.01" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="maisDespesasFixas">Acionar Mais Despesas</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim do modal para inserir gastos fixos, colocar isso para o arquivo js depois -->
     <script>
+        const cargosUrl = "{% url 'cargos_vieww' %}";
+        const enderecoUrl = "{% url 'endereco_view' %}";
     </script>
-    
-    <!-- fim da Modal Gastos Fixos-->
+    <script defer src="{% static 'assets/js/script_login.js' %}"></script>
+    <script defer src="{% static 'assets/js/script_index.js' %}"></script>
+    <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Navbar-With-Button-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Simple-Slider-swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/Simple-Slider.css' %}">
+</head>
 
-    <!-- Começo da Modal Mão de Obra-->
-    <div class="modal fade" id="modalMaoDeObra" tabindex="-1" aria-labelledby="modalMaoDeObraLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalMaoDeObraLabel">Cadastrar Mão de Obra</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{% url 'inserir_mao_de_obra' %}">
-                        {% csrf_token %}
-                        <div class="mao-de-obra-container">
-                            <div class="mb-3">
-                                <label for="matricula" class="form-label">Matrícula</label>
-                                <input type="text" class="form-control" name="matricula" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="nome" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" name="cpf" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="salario" class="form-label">Salário</label>
-                                <input type="number" class="form-control" name="salario" step="0.01" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="beneficios" class="form-label">Benefícios</label>
-                                <input type="number" class="form-control" name="beneficios" step="0.01" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="encargos" class="form-label">Encargos</label>
-                                <input type="number" class="form-control" name="encargos" step="0.01" required>
-                            </div>
-                            <div class="mb-3">
-                                <select class="form-select" name="cargo" required>
-                                    <option value="" selected disabled>Selecione um cargo</option>
-                                    {% for cargo in cargos %}
-                                        <option value="{{ cargo.id }}">{{ cargo.nome_cargo }}</option>
-                                    {% endfor %}
-                                </select>                               
-                            </div>
-                            <div class="mb-3">
-                                <label for="endereco" class="form-label">Endereço</label>
-                                <select class="form-select" name="endereco" required>
-                                    <option value="" selected disabled>Selecione um endereço</option>
-                                    {% for endereco in enderecos %}
-                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            
+<body class="fundo">
+    <header>
+        <div class="d-flex flex-row justify-content-end align-items-center header">
+            <p class="p-header">Bem vindo, {{ user.username }}.</p>
+            <i class="far fa-user"></i>
+        </div>
+    </header>
+    <div class="offcanvas-sm offcanvas-start bg-body" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-menu">
+        <div class="offcanvas-body d-flex flex-column justify-content-between pt-0">
+            <div class="div-logo"></div>
+            <div>
+                <hr class="mt-0">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a class="a-titulo" href="#" aria-current="page">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-house-door me-2">
+                                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"></path>
+                            </svg>Home </a></li>
+                    <li class="nav-item">
+                        <div class="teste">
+                        <a class="a-titulo" href="#cadastrosCollapse" aria-expanded="false" data-bs-toggle="collapse" role="button" aria-controls="cadastrosCollapse">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill me-2">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
+                            </svg>Cadastros</a>
+                        <div id="cadastrosCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCadastros">Empresa</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalMaoDeObra">Colaborador</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Endereço</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Alterar Senha</a></li>
+                            </ul>
                         </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="maisMaoDeObra">Acionar Mais Mão de Obra</button>
-                </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" data-bs-toggle="collapse" role="button" aria-expanded="false" href="#maoDeObraCollapse" aria-controls="maoDeObraCollapse">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-tools me-2">
+                                <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"></path>
+                            </svg>Mão de Obra</a>
+                        <div id="maoDeObraCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" href="#">Cargo / Salário</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Benefícios</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Encargos</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" href="#horasProdutivasCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="horasProdutivasCollapse">
+                            <i class="fa fa-calendar"></i>Horas Produtivas</a>
+                        <div id="horasProdutivasCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" href="#">Calendário mensal</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalHorasProdutivas">Jornada de trabalho diária</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" href="#despesasFixasCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="despesasFixasCollapse">
+                            <i class="fa fa-dollar"></i>Despesas Fixas</a>
+                        <div id="despesasFixasCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalDespesasFixas">Cadastrar</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Valor Hora Fixa</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" href="#precificacaoCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="precificacaoCollapse">
+                            <i class="fa fa-clipboard"></i>Orçamento</a>
+                        <div id="precificacaoCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalPrecificacao">Cadastrar Orçamento</a></li>
+                                <li class="li-pad"><a class="nav-sub" href="#">Memórias de Cálculos</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" href="#relatorioCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="relatorioCollapse">
+                        <i class="fa fa-print"></i>Relatórios</a>
+                        <div id="relatorioCollapse" class="collapse">
+                            <ul class="ul-item">
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalRelatorios">DRE</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="a-titulo" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-in me-2"></i>Sair</a>
+                        <ul style="font-size: 20px;font-weight: bold;"></ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <!-- Fim da Modal Mão de Obra-->
 
     <!--Começo Modal Cadastros-->
-    <div class="modal fade" id="modalCadastros" tabindex="-1" aria-labelledby="modalCadastros" aria-hidden="true">
-    
-    
+    <div class="modal fade" id="modalCadastros" tabindex="-1" aria-labelledby="modalCadastros" aria-hidden="true">  
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -268,109 +199,104 @@
             </div>
         </div>
     </div> 
-
-
     <!--Fim modal Cadastros  -->
-    <script>
 
-        // função para selecionar o cargo do banco
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch("{% url 'cargos_vieww' %}")
-                .then(response => response.json())
-                .then(data => {
-                    const selectElement = document.querySelector('select[name="cargo"]');
-                    data.cargos.forEach(cargo => {
-                        const option = document.createElement('option');
-                        option.value = cargo.id;
-                        option.textContent = cargo.nome_cargo;
-                        selectElement.appendChild(option);
-                    });
-                });
-                        // fim do script para selecionar o cargo do banco
-    
-
-            // script para buscar o endereço do banco
-            fetch("{% url 'endereco_view' %}")
-                .then(response => response.json())
-                .then(data => {
-                    const selectElement = document.querySelectorAll('select[name="endereco"]');
-                    data.enderecos.forEach(endereco => {
-                        const option = document.createElement('option');
-                        option.value = endereco.id;
-                        option.textContent = endereco.endereco;
-                        selectElement.forEach(select => select.appendChild(option.cloneNode(true)));
-                    });
-                });
-        });
-
-        // script para buscar o endereço do banco
-    
-        // script para adicionar mais campos de despesas fixas
-        
-        document.getElementById('maisDespesasFixas').addEventListener('click', function () {
-            const despesaContainer = document.querySelector('.despesa-container');
-                const clone = despesaContainer.cloneNode(true);
-                const descricaoInput = clone.querySelector('input[name="descricao"]');
-                const valorInput = clone.querySelector('input[name="valor"]');
-                descricaoInput.value = '';
-                valorInput.value = '';
-                despesaContainer.parentNode.insertBefore(clone, despesaContainer.nextSibling);
-        });
-        
-        // Fim do script para adicionar mais campos de despesas fixas
-
-
-        // scritp para adicionar mais campos de mão de obra
-        document.getElementById('maisMaoDeObra').addEventListener('click', function () {
-            const maoDeObraContainer = document.querySelector('.mao-de-obra-container');
-                const clone = maoDeObraContainer.cloneNode(true);
-                const matriculaInput = clone.querySelector('input[name="matricula"]');
-                const nomeInput = clone.querySelector('input[name="nome"]');
-                const cpfInput = clone.querySelector('input[name="cpf"]');
-                const salarioInput = clone.querySelector('input[name="salario"]');
-                const beneficiosInput = clone.querySelector('input[name="beneficios"]');
-                const encargosInput = clone.querySelector('input[name="encargos"]');
-                matriculaInput.value = '';
-                nomeInput.value = '';
-                cpfInput.value = '';
-                salarioInput.value = '';
-                beneficiosInput.value = '';
-                encargosInput.value = '';
-                maoDeObraContainer.parentNode.insertBefore(clone, maoDeObraContainer.nextSibling);
-        });
-                // fim do script 
-
-        // Alerta da empresas cadastrada, ainda não funcionando
-        const urlParams = new URLSearchParams(window.location.search);
-        const success = urlParams.get('success');
-        
-        if (success === 'true') {
-            alert('Empresa cadastrada com sucesso!');
-        }
-
-        // Fim do alerta
-
-
-        // Validação do número da empresa
-        document.addEventListener('DOMContentLoaded', function () {
-            const numeroEmpresaInput = document.querySelector('input[name="numero_empresa"]');
-            
-            numeroEmpresaInput.addEventListener('input', function () {
-                const maxDigits = 4;
-                if (this.value.length > maxDigits) {
-                    alert(`Digite no máximo ${maxDigits} dígitos.`);
-                    this.value = this.value.slice(0, maxDigits);
-                }
-            });
-        });
-        //fim da validação do numero da empresa
-            // Ative todos os checkboxes de switch na página
-            // começo do script
-            var switchCheckboxes = document.querySelectorAll('.form-switch input[type="checkbox"]');
-            switchCheckboxes.forEach(function(checkbox) {
-                new bootstrap.Switch(checkbox);
-            });
-            // Fim do script
-    </script>
+    <!-- Modal para inserir gastos fixos -->
+    <div class="modal fade" id="modalDespesasFixas" tabindex="-1" aria-labelledby="modalDespesasFixasLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDespesasFixasLabel">Cadastrar Despesa Fixa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_gasto_fixo' %}">
+                        {% csrf_token %}
+                        <div class="despesa-container">
+                            <div class="mb-3">
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text" class="form-control" name="descricao" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Valor</label>
+                                <input type="number" class="form-control" name="valor" step="0.01" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="maisDespesasFixas">Acionar Mais Despesas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim do modal para inserir gastos fixos, colocar isso para o arquivo js depois -->
+    <!-- Começo da Modal Mão de Obra-->
+    <div class="modal fade" id="modalMaoDeObra" tabindex="-1" aria-labelledby="modalMaoDeObraLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalMaoDeObraLabel">Cadastrar Mão de Obra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_mao_de_obra' %}">
+                        {% csrf_token %}
+                        <div class="mao-de-obra-container">
+                            <div class="mb-3">
+                                <label for="matricula" class="form-label">Matrícula</label>
+                                <input type="text" class="form-control" name="matricula" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" name="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" name="cpf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="salario" class="form-label">Salário</label>
+                                <input type="number" class="form-control" name="salario" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="beneficios" class="form-label">Benefícios</label>
+                                <input type="number" class="form-control" name="beneficios" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="encargos" class="form-label">Encargos</label>
+                                <input type="number" class="form-control" name="encargos" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="cargo" required>
+                                    <option value="" selected disabled>Selecione um cargo</option>
+                                    {% for cargo in cargos %}
+                                        <option value="{{ cargo.id }}">{{ cargo.nome_cargo }}</option>
+                                    {% endfor %}
+                                </select>                               
+                            </div>
+                            <div class="mb-3">
+                                <label for="endereco" class="form-label">Endereço</label>
+                                <select class="form-select" name="endereco" required>
+                                    <option value="" selected disabled>Selecione um endereço</option>
+                                    {% for endereco in enderecos %}
+                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="maisMaoDeObra">Acionar Mais Mão de Obra</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
