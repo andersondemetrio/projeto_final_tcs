@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  .fundo {
+    background: #F5F5F5;
+  }
+
+  .header {
+    background: rgb(37,31,77);
+    height: 50px;
+  }
+
+  .p-header {
+    margin-right: 20px;
+    margin-top: 7px;
+    color: rgb(255,255,255);
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .fa-user {
+    height: 24px;
+    font-weight: bold;
+    color: rgb(255,255,255);
+    margin-right: 20px;
+  }
+
+  .fa {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .offcanvas-sm {
+    width: 280px;
+    border-right: 2px solid rgb(37, 31, 77);
+    height: 100vh;
+  }
+
+  .div-logo {
+    height: 150px;
+    background: url("../../assets/img/rprice_logo_280_150.png") center / contain no-repeat;
+  }
+
+ .a-titulo {
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 20px;
+    font-weight: bold;
+    color: rgb(37, 31, 77);
+    transition: 0.1s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .a-titulo:hover{
+    width: 280px;
+    background-color: rgb(37, 31, 77);
+    color: white;
+  }
+
+  .nav-sub {
+    width: 100%;
+    height: 37px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(37, 31, 77);
+    text-decoration: none;
+    display: block;
+    display: flex;
+    align-items: center;
+  }
+
+  .ul-item {
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 0px;
+  }
+
+  .li-pad {
+    padding-left: 55px;
+    height: 37px;
+    display: block;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-sub:hover {
+    background-color: #DC2768;
+    color: white;
+  }
+
+  .li-pad:hover {
+    background-color: #DC2768;
+    color: white;
+  }
