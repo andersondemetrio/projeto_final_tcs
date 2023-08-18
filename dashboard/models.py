@@ -7,9 +7,9 @@ from django.db.models import Q
 
 class Endereco(models.Model):
     cep = models.CharField(max_length=9)
-    logradouro = models.CharField(max_length=15)
-    endereco = models.CharField(max_length=40)
-    numero = models.CharField(max_length=10)
+    logradouro = models.CharField(max_length=30)
+   # endereco = models.CharField(max_length=40)
+    numero = models.CharField(max_length=30)
     complemento = models.CharField(max_length=30)
     bairro = models.CharField(max_length=30)
     cidade = models.CharField(max_length=30)
@@ -53,7 +53,7 @@ class Colaboradores(models.Model):
     salario = models.DecimalField(max_digits=10, decimal_places=2)
     beneficios = models.DecimalField(max_digits=10, decimal_places=2)
     encargos = models.DecimalField(max_digits=10, decimal_places=2)
-    endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
+    #endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class GastosVariaveis(models.Model):

@@ -16,11 +16,22 @@
         const cargosUrl = "{% url 'cargos_vieww' %}";
         const enderecoUrl = "{% url 'endereco_view' %}";
     </script>
+
+    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="{% static 'assets/js/script_login.js' %}"></script>
+    <script defer src="{% static 'assets/js/script_index.js' %}"></script>
+    <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
+    <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script> {% endcomment %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="{% static 'assets/js/script_login.js' %}"></script>
     <script defer src="{% static 'assets/js/script_index.js' %}"></script>
     <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script>
+
+
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
@@ -58,7 +69,8 @@
                             <ul class="ul-item">
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCadastros">Empresa</a></li>
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalMaoDeObra">Colaborador</a></li>
-                                <li class="li-pad"><a class="nav-sub" href="#">Endereço</a></li>
+                                <!--li class="li-pad"><a class="nav-sub" href="#">Endereço</a></li -->
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalEndereco">Endereço</a></li> 
                                 <li class="li-pad"><a class="nav-sub" href="#">Alterar Senha</a></li>
                             </ul>
                         </div>
@@ -277,7 +289,7 @@
                                     {% endfor %}
                                 </select>                               
                             </div>
-                            <div class="mb-3">
+                            <!--div class="mb-3">
                                 <label for="endereco" class="form-label">Endereço</label>
                                 <select class="form-select" name="endereco" required>
                                     <option value="" selected disabled>Selecione um endereço</option>
@@ -285,7 +297,7 @@
                                         <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
                                     {% endfor %}
                                 </select>
-                            </div>
+                            </div-->
                             
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -298,5 +310,100 @@
             </div>
         </div>
     </div>
+<!-- Começo Modal endereço-->
+<div class="modal fade" id="modalEndereco" tabindex="-1" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEnderecoLabel">Cadastrar Endereço</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'inserir_endereco' %}">
+                    {% csrf_token %}
+                    <div class="endereco-container">
+                        <div class="mb-3">
+                            <label for="cep" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="cepInput" name="cep" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="btnBuscarCEP">Buscar CEP</button>
+                        
+                        <div class="mb-3">
+                            <label for="logradouro" class="form-label">Logradouro</label>
+                            <input type="text" class="form-control" id="logradouro" name="logradouro" required>
+                        </div>
+                        <!--div class="mb-3">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" name="endereco" required>
+                        </div-->
+                        <div class="mb-3">
+                            <label for="numero" class="form-label">Número</label>
+                            <input type="text" class="form-control" name="numero" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="complemento" class="form-label">Complemento</label>
+                            <input type="text" class="form-control" name="complemento">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" name="bairro" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="estado" name="estado" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Endereço</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fim modal Endereço-->
+
+<!-- Adicione o jQuery -->
+<!-- Seu código jQuery para buscar o CEP e preencher os campos -->
+<!-- Adicione o jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--  jQuery para buscar o CEP e preencher os campos -->
+<script>
+$(document).ready(function() {
+    $("#btnBuscarCEP").click(function() {
+        var cep = $("#cepInput").val().replace(/\D/g, '');
+
+        if (cep.length === 8) {
+            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function(data) {
+                if (!data.erro) {
+                    $("#logradouro").val(data.logradouro);
+                    $("#bairro").val(data.bairro);
+                    $("#cidade").val(data.localidade);
+                    $("#estado").val(data.uf);
+                } else {
+                    // CEP não encontrado ou erro na API
+                    alert("CEP não encontrado. Verifique o CEP digitado.");
+                }
+            })
+            .fail(function() {
+                // Erro na requisição da API
+                alert("Ocorreu um erro ao buscar o CEP. Tente novamente mais tarde.");
+            });
+        } else {
+            // CEP inválido
+            alert("CEP inválido. O CEP deve conter 8 dígitos.");
+        }
+    });
+});
+</script>
+
+    
 </body>
 </html>
