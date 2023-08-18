@@ -39,6 +39,7 @@ def inserir_gasto_fixo(request):
         descricao = request.POST['descricao']
         valor = request.POST['valor']
         GastosFixos.objects.create(descricao=descricao, valor=valor)
+        return redirect('dashboard')
     return render(request, 'dashboard1.html', context={})
 
 def inserir_mao_de_obra(request):
@@ -116,3 +117,17 @@ def inserir_empresa(request):
         return redirect('dashboard')
 
     return render(request, 'dashboard1.html', context={})
+
+def inserir_endereco(request):
+    if request.method == 'POST':
+        logradouro = request.POST['logradouro']
+        numero = request.POST['numero']
+        complemento = request.POST['complemento']
+        bairro = request.POST['bairro']
+        cidade = request.POST['cidade']
+        estado = request.POST['estado']
+        Endereco.objects.create(logradouro=logradouro, numero=numero, complemento=complemento, bairro=bairro, cidade=cidade, 
+                                estado=estado)
+        return redirect('dashboard')
+    return render(request, 'dashboard1.html', context={})
+

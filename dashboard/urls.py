@@ -7,5 +7,6 @@ urlpatterns = [
     path('cargos_vieww/', cargos_vieww, name='cargos_vieww'),
     path('listar_enderecos/', endereco_view, name='endereco_view'),
     path('inserir_empresa/', inserir_empresa, name='inserir_empresa'),
+    path('inserir_endereco/', inserir_endereco, name='inserir_endereco'),
 
 ]
