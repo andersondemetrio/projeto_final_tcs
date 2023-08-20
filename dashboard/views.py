@@ -13,8 +13,9 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.conf import settings
 import random
-from .models import GastosFixos,Colaboradores,Cargos, Endereco, Empresa
-from .forms import EmpresaForm
+from .models import GastosFixos,Colaboradores,Cargos, Endereco, Empresa,CalendarioMensal
+
+
 
 @login_required
 def dashboard_view(request):
@@ -168,3 +169,38 @@ def inserir_jornada(request):
 
 def inserir_horas(request):
     return render(request, 'dashboard1.html', context={})       
+
+
+
+# Função para validar a inserção dos dias uties e horas produtiva do mes 
+
+def inserir_calendario(request):
+    if request.method == "POST":
+        mes = int(request.POST.get("mes"))
+        ano = int(request.POST.get("ano"))
+        jornada_diaria = float(request.POST.get("jornada_diaria"))
+        funcionario_id = int(request.POST.get("funcionario"))
+        horas_produtivas = float(request.POST.get("horas_produtivas"))
+        dias_uteis = int(request.POST.get("dias_uteis"))  # Pegar o valor dos dias úteis
+
+        funcionario = Colaboradores.objects.get(pk=funcionario_id)
+
+        calendario = CalendarioMensal(
+            mes=mes,
+            ano=ano,
+            jornada_diaria=jornada_diaria,
+            funcionario=funcionario,
+            horas_produtivas=horas_produtivas,
+            dias_uteis=dias_uteis  # Definir o valor dos dias úteis
+        )
+        calendario.save()
+
+        return redirect("dashboard")  # Redirecionar para uma página de sucesso
+
+    return render(request, "dashboard1.html")
+
+# funçaõ para listar os colaboradores no select do calendario
+def colaboradores_view(request):
+    colaboradores = Colaboradores.objects.all()
+    colaboradores_list = [{'id': colaborador.id, 'nome': colaborador.nome} for colaborador in colaboradores]
+    return JsonResponse({'colaboradores': colaboradores_list})

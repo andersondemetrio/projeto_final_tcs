@@ -1,5 +1,8 @@
 from django import forms
-from dashboard.models import  GastosFixos,GastosVariaveis, Colaboradores,Cargos,Endereco,Empresa,HorasProdutivas,Insumos
+from dashboard.models import  GastosFixos,GastosVariaveis, Colaboradores,Cargos,Endereco,Empresa,HorasProdutivas,Insumos,CalendarioMensal
+from workalendar.america import Brazil  # Importe o calendário do Brasil
+import datetime
+import calendar
 
 class GastosFixosForm(forms.ModelForm):
     class Meta:
@@ -40,4 +43,3 @@ class HorasProdutivasForm(forms.ModelForm):
     class Meta:
         model = HorasProdutivas
         fields = "__all__"
-        

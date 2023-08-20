@@ -120,3 +120,62 @@ $(document).ready(function() {
     });
 });
 
+fetch(colaboradoresUrl)
+        .then(response => response.json())
+        .then(data => {
+            const colaboradoresSelect = document.querySelector('select[name="funcionario"]');
+            data.colaboradores.forEach(colaborador => {
+                const option = document.createElement('option');
+                option.value = colaborador.id;
+                option.textContent = colaborador.nome;
+                colaboradoresSelect.appendChild(option);
+            });
+        });
+
+
+ // função para calcular dias uteis do funcionario
+ 
+ function calcularDiasUteis(ano, mes) {
+    const inicioMes = new Date(ano, mes - 1, 1);
+    const fimMes = new Date(ano, mes, 0);
+    let diasUteis = 0;
+
+    for (let dia = inicioMes; dia <= fimMes; dia.setDate(dia.getDate() + 1)) {
+        if (dia.getDay() !== 0 && dia.getDay() !== 6) {
+            diasUteis++;
+        }
+    }
+
+    return diasUteis;
+}
+
+// função para calcular horas produtivas do funcionario
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#calendarioForm");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const mes = parseInt(document.querySelector("#mes").value);
+        const ano = parseInt(document.querySelector("#ano").value);
+        const jornadaDiariaValue = document.querySelector("#jornada_diaria").value;
+        const funcionario = document.querySelector("#funcionario").value;
+
+        if (isNaN(mes) || isNaN(ano) || jornadaDiariaValue === "" || funcionario === "") {
+            alert("Preencha todos os campos obrigatórios corretamente.");
+            return;
+        }
+
+        const jornadaDiaria = parseFloat(jornadaDiariaValue);
+
+        const diasUteis = calcularDiasUteis(ano, mes);
+        const horasProdutivas = diasUteis * jornadaDiaria;
+
+        // Preencher os valores calculados nos campos de horas_produtivas e dias_uteis
+        document.querySelector("#horas_produtivas").value = horasProdutivas;
+        document.querySelector("#dias_uteis").value = diasUteis;
+
+        // Enviar o formulário
+        form.submit();
+    });
+});

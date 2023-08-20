@@ -13,6 +13,7 @@
     <script>
         const cargosUrl = "{% url 'cargos_vieww' %}";
         const enderecoUrl = "{% url 'endereco_view' %}";
+		const colaboradoresUrl = "{% url 'colaboradores_view' %}";
         var keepModalOpen = {% if keep_modal_open %}true{% else %}false{% endif %};
         var messagesExist = {% if messages %}true{% else %}false{% endif %};
     </script>
@@ -494,23 +495,41 @@
     <!--Fim modal Perfil Encargo -->
 
     <!-- Começo Modal Calendário -->
+	
     <div class="modal fade" id="modalCalendario" tabindex="-1" aria-labelledby="modalCalendarioLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalCalendarioLabel">Cadastrar Dias</h5>
+                    <h5 class="modal-title" id="modalCalendarioLabel">Cadastrar Dias Úteis</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{% url 'inserir_data' %}">
+                    <form method="post" action="{% url 'inserir_calendario' %}" id="calendarioForm">
                         {% csrf_token %}
                         <div class="calendario-container">
-                            {% comment %} <div class="mb-3">
-                                <label for="calendario" class="form-label">Data Cadastro</label>
-                                <input type="text" class="form-control" id="calendarioInput" name="calendario" required>
-                            </div>                        {% endcomment %}
+                            <div class="mb-3">
+                                <label for="mes" class="form-label">Mês</label>
+                                <input type="number" class="form-control" id="mes" name="mes" min="1" max="12" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ano" class="form-label">Ano</label>
+                                <input type="number" class="form-control" id="ano" name="ano" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="jornada_diaria" class="form-label">Jornada Diária</label>
+                                <input type="number" class="form-control" id="jornada_diaria" name="jornada_diaria" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="funcionario" class="form-label">Funcionário</label>
+                                <select class="form-select" id="funcionario" name="funcionario" required>
+                                    <option value="" disabled selected>Selecione um funcionário</option>
+                                    <!-- Dados dos colaboradores serão preenchidos dinamicamente aqui -->
+                                </select>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <input type="hidden" id="horas_produtivas" name="horas_produtivas">
+                        <input type="hidden" id="dias_uteis" name="dias_uteis">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Salvar</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -519,34 +538,38 @@
             </div>
         </div>
     </div>
-    <!--Fim modal Calendário->
+    
 
-    <!- Começo Modal Jornada -->
-    <div class="modal fade" id="modalHorasProdutivas" tabindex="-1" aria-labelledby="modalHorasProdutivasLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalHorasProdutivasLabel">Cadastrar Jornada</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{% url 'inserir_jornada' %}">
-                        {% csrf_token %}
-                        <div class="jornada-container">
-                            {% comment %} <div class="mb-3">
-                                <label for="calendario" class="form-label">Data Cadastro</label>
-                                <input type="text" class="form-control" id="calendarioInput" name="calendario" required>
-                            </div>                        {% endcomment %}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!--Fim modal Calendário->
+   
+	<!-- Começo Modal Jornada -->
+	<div class="modal fade" id="modalHorasProdutivas" tabindex="-1" aria-labelledby="modalHorasProdutivasLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalHorasProdutivasLabel">Cadastrar Jornada de Trabalho</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="{% url 'inserir_jornada' %}">
+						{% csrf_token %}
+						<div class="jornada-container">
+							<div class="mb-3">
+								<label for="jornada_diaria" class="form-label">Jornada Diária (horas)</label>
+								<input type="number" class="form-control" id="jornada_diaria" name="jornada_diaria" step="0.01" required>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Fim modal Jornada -->
+
     <!--Fim modal Jornada->
 
     <! Começo Modal Hora Fixa -->
@@ -576,6 +599,5 @@
         </div>
     </div>
     <!--Fim modal Jornada-->
-
 </body>
 </html>

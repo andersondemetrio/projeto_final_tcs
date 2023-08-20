@@ -65,3 +65,17 @@ class Propostas(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     data_proposta = models.DateField()
     aprovada = models.BooleanField()
+
+# Necessário criação de uma nova classe no banco para realizar o valor das horas do colaborador
+
+
+# Model criada para atener a demanda de 
+class CalendarioMensal(models.Model):
+    mes = models.PositiveIntegerField()
+    ano = models.PositiveIntegerField()
+    funcionario = models.ForeignKey(Colaboradores, on_delete=models.CASCADE)
+    dias_uteis = models.PositiveIntegerField()
+    jornada_diaria = models.DecimalField(max_digits=5, decimal_places=2)  # Adicione este campo
+    horas_produtivas = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+
