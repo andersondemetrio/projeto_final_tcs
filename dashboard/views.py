@@ -131,3 +131,40 @@ def inserir_endereco(request):
         return redirect('dashboard')
     return render(request, 'dashboard1.html', context={})
 
+# @login_required
+def alterar_senha(request):
+    if request.method == 'POST':
+        nova_senha = request.POST.get('novaSenha')
+        repetir_senha = request.POST.get('repetirSenha')
+
+        if nova_senha == repetir_senha:
+            user = request.user
+            user.set_password(nova_senha)
+            user.save()
+            
+            # Atualiza a sessão de autenticação para evitar logout automático
+            # update_session_auth_hash(request, user)
+
+            messages.success(request, 'Senha alterada com sucesso.')
+            return redirect('login')
+        else:
+            messages.error(request, 'As senhas não coincidem.')
+    return render(request, 'dashboard1.html', {'keep_modal_open': True})
+
+def inserir_cargo(request):
+    return render(request, 'dashboard1.html', context={})
+
+def inserir_beneficio(request):
+    return render(request, 'dashboard1.html', context={})
+
+def inserir_encargo(request):
+    return render(request, 'dashboard1.html', context={})
+
+def inserir_data(request):
+    return render(request, 'dashboard1.html', context={})    
+
+def inserir_jornada(request):
+    return render(request, 'dashboard1.html', context={})
+
+def inserir_horas(request):
+    return render(request, 'dashboard1.html', context={})       

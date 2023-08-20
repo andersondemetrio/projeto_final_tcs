@@ -23,6 +23,10 @@
     letter-spacing: 1px;
   }
 
+  .userName {
+    color: #DC2768;
+  }
+
   .fa-user {
     height: 24px;
     font-weight: bold;

@@ -9,29 +9,19 @@
     <title>Página inicial</title>
     <link rel="stylesheet" href="{% static 'assets/css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const cargosUrl = "{% url 'cargos_vieww' %}";
         const enderecoUrl = "{% url 'endereco_view' %}";
+        var keepModalOpen = {% if keep_modal_open %}true{% else %}false{% endif %};
+        var messagesExist = {% if messages %}true{% else %}false{% endif %};
     </script>
-
-    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="{% static 'assets/js/script_login.js' %}"></script>
-    <script defer src="{% static 'assets/js/script_index.js' %}"></script>
-    <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
-    <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script> {% endcomment %}
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="{% static 'assets/js/script_login.js' %}"></script>
     <script defer src="{% static 'assets/js/script_index.js' %}"></script>
     <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script>
-
-
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
@@ -44,7 +34,8 @@
 <body class="fundo">
     <header>
         <div class="d-flex flex-row justify-content-end align-items-center header">
-            <p class="p-header">Bem vindo, {{ user.username }}.</p>
+            <p class="p-header">Bem vindo, </p>
+            <p class="userName">{{ user.username }}.</p>
             <i class="far fa-user"></i>
         </div>
     </header>
@@ -69,9 +60,8 @@
                             <ul class="ul-item">
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCadastros">Empresa</a></li>
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalMaoDeObra">Colaborador</a></li>
-                                <!--li class="li-pad"><a class="nav-sub" href="#">Endereço</a></li -->
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalEndereco">Endereço</a></li> 
-                                <li class="li-pad"><a class="nav-sub" href="#">Alterar Senha</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalSenha">Alterar Senha</a></li>
                             </ul>
                         </div>
                         </div>
@@ -83,9 +73,9 @@
                             </svg>Mão de Obra</a>
                         <div id="maoDeObraCollapse" class="collapse">
                             <ul class="ul-item">
-                                <li class="li-pad"><a class="nav-sub" href="#">Cargo / Salário</a></li>
-                                <li class="li-pad"><a class="nav-sub" href="#">Benefícios</a></li>
-                                <li class="li-pad"><a class="nav-sub" href="#">Encargos</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCargoSalario">Cargo / Salário</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalPerfilBeneficio">Benefícios</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalPerfilEncargo">Encargos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -94,7 +84,7 @@
                             <i class="fa fa-calendar"></i>Horas Produtivas</a>
                         <div id="horasProdutivasCollapse" class="collapse">
                             <ul class="ul-item">
-                                <li class="li-pad"><a class="nav-sub" href="#">Calendário mensal</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCalendario">Calendário mensal</a></li>
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalHorasProdutivas">Jornada de trabalho diária</a></li>
                             </ul>
                         </div>
@@ -105,7 +95,7 @@
                         <div id="despesasFixasCollapse" class="collapse">
                             <ul class="ul-item">
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalDespesasFixas">Cadastrar</a></li>
-                                <li class="li-pad"><a class="nav-sub" href="#">Valor Hora Fixa</a></li>
+                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalHoraFixa">Valor Hora Fixa</a></li>
                             </ul>
                         </div>
                     </li>
@@ -138,7 +128,7 @@
         </div>
     </div>
 
-    <!--Começo Modal Cadastros-->
+    <!--Começo Modal Cadastro Empresa-->
     <div class="modal fade" id="modalCadastros" tabindex="-1" aria-labelledby="modalCadastros" aria-hidden="true">  
         <div class="modal-dialog">
             <div class="modal-content">
@@ -200,9 +190,7 @@
                                 }, 3000);
                             </script>
                         </div>
-                        {% endif %}                        
-                        
-                        
+                        {% endif %}                                           
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -211,7 +199,7 @@
             </div>
         </div>
     </div> 
-    <!--Fim modal Cadastros  -->
+    <!--Fim modal Cadastro Empresa -->
 
     <!-- Modal para inserir gastos fixos -->
     <div class="modal fade" id="modalDespesasFixas" tabindex="-1" aria-labelledby="modalDespesasFixasLabel" aria-hidden="true">
@@ -245,6 +233,7 @@
         </div>
     </div>
     <!-- Fim do modal para inserir gastos fixos, colocar isso para o arquivo js depois -->
+
     <!-- Começo da Modal Mão de Obra-->
     <div class="modal fade" id="modalMaoDeObra" tabindex="-1" aria-labelledby="modalMaoDeObraLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -288,17 +277,7 @@
                                         <option value="{{ cargo.id }}">{{ cargo.nome_cargo }}</option>
                                     {% endfor %}
                                 </select>                               
-                            </div>
-                            <!--div class="mb-3">
-                                <label for="endereco" class="form-label">Endereço</label>
-                                <select class="form-select" name="endereco" required>
-                                    <option value="" selected disabled>Selecione um endereço</option>
-                                    {% for endereco in enderecos %}
-                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div-->
-                            
+                            </div>                           
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </form>
@@ -310,100 +289,293 @@
             </div>
         </div>
     </div>
-<!-- Começo Modal endereço-->
-<div class="modal fade" id="modalEndereco" tabindex="-1" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEnderecoLabel">Cadastrar Endereço</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="{% url 'inserir_endereco' %}">
-                    {% csrf_token %}
-                    <div class="endereco-container">
-                        <div class="mb-3">
-                            <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cepInput" name="cep" required>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="btnBuscarCEP">Buscar CEP</button>
+
+    <!-- Começo Modal endereço-->
+    <div class="modal fade" id="modalEndereco" tabindex="-1" aria-labelledby="modalEnderecoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEnderecoLabel">Cadastrar Endereço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_endereco' %}">
+                        {% csrf_token %}
+                        <div class="endereco-container">
+                            <div class="mb-3">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cepInput" name="cep" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="btnBuscarCEP">Buscar CEP</button>
                         
-                        <div class="mb-3">
-                            <label for="logradouro" class="form-label">Logradouro</label>
-                            <input type="text" class="form-control" id="logradouro" name="logradouro" required>
+                            <div class="mb-3">
+                                <label for="logradouro" class="form-label">Logradouro</label>
+                                <input type="text" class="form-control" id="logradouro" name="logradouro" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numero" class="form-label">Número</label>
+                                <input type="text" class="form-control" name="numero" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="complemento" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" name="complemento">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" name="bairro" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="cidade" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="estado" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="estado" name="estado" required>
+                            </div>
                         </div>
-                        <!--div class="mb-3">
-                            <label for="endereco" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="endereco" name="endereco" required>
-                        </div-->
-                        <div class="mb-3">
-                            <label for="numero" class="form-label">Número</label>
-                            <input type="text" class="form-control" name="numero" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="complemento" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" name="complemento">
-                        </div>
-                        <div class="mb-3">
-                            <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" name="bairro" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cidade" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Estado</label>
-                            <input type="text" class="form-control" id="estado" name="estado" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Cadastrar Endereço</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Cadastrar Endereço</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--Fim modal Endereço-->
+    <!--Fim modal Endereço-->
 
-<!-- Adicione o jQuery -->
-<!-- Seu código jQuery para buscar o CEP e preencher os campos -->
-<!-- Adicione o jQuery -->
+    <!-- Começo Modal Alterar Senha -->
+    <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="modalSenhaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSenhaLabel">Alterar Senha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'alterar_senha' %}">
+                        {% csrf_token %}
+                        <div class="cargo-container">
+                            <div class="mb-3">
+                                <label for="novaSenha" class="form-label">Nova senha</label>
+                                <input type="text" class="form-control" id="novaSenhaInput" name="novaSenha" required>
+                            </div>                       
+                        </div>
+                        <div class="cargo-container">
+                            <div class="mb-3">
+                                <label for="repetirSenha" class="form-label">Repetir senha</label>
+                                <input type="text" class="form-control" id="repetirSenhaInput" name="repetirSenha" required>
+                            </div>                       
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Alterar Senha -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Começo Modal Cargos / Salários -->
+    <div class="modal fade" id="modalCargoSalario" tabindex="-1" aria-labelledby="modalCargoSalarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCargoSalarioLabel">Cadastrar Cargos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_cargo' %}">
+                        {% csrf_token %}
+                        <div class="cargo-container">
+                            <div class="mb-3">
+                                <label for="dataCadastro" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="dataCadastroInput" name="dataCadastro" required>
+                            </div>                       
+                            <div class="mb-3">
+                                <label for="nomeCargo" class="form-label">Nome Cargo</label>
+                                <input type="text" class="form-control" id="nomeCargo" name="nomeCargo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="selectPerfilBeneficio" class="form-label">Perfil Benefício</label>
+                                <select class="form-select" name="selectPerfilBeneficio" required>
+                                    <option value="" selected disabled>Selecione um perfil</option>
+                                    {% comment %} {% for endereco in enderecos %}
+                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
+                                    {% endfor %} {% endcomment %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="selectPerfilEncargo" class="form-label">Perfil Encargo</label>
+                                <select class="form-select" name="selectPerfilEncargo" required>
+                                    <option value="" selected disabled>Selecione um perfil</option>
+                                    {% comment %} {% for endereco in enderecos %}
+                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
+                                    {% endfor %} {% endcomment %}
+                                </select>
+                            </div>
+                            <div class="mb-3 form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="ativa">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Considerar no Rateio</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Cargo</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Cargos / Salários -->
 
-<!--  jQuery para buscar o CEP e preencher os campos -->
-<script>
-$(document).ready(function() {
-    $("#btnBuscarCEP").click(function() {
-        var cep = $("#cepInput").val().replace(/\D/g, '');
+    <!-- Começo Modal Perfil Benefício -->
+    <div class="modal fade" id="modalPerfilBeneficio" tabindex="-1" aria-labelledby="modalPerfilBeneficioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPerfilBeneficioLabel">Cadastrar Benefício</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_beneficio' %}">
+                        {% csrf_token %}
+                        <div class="beneficio-container">
+                            <div class="mb-3">
+                                <label for="dataCadastro" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="dataCadastroInput" name="dataCadastro" required>
+                            </div>                       
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Benefício</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Perfil Benefício -->
 
-        if (cep.length === 8) {
-            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function(data) {
-                if (!data.erro) {
-                    $("#logradouro").val(data.logradouro);
-                    $("#bairro").val(data.bairro);
-                    $("#cidade").val(data.localidade);
-                    $("#estado").val(data.uf);
-                } else {
-                    // CEP não encontrado ou erro na API
-                    alert("CEP não encontrado. Verifique o CEP digitado.");
-                }
-            })
-            .fail(function() {
-                // Erro na requisição da API
-                alert("Ocorreu um erro ao buscar o CEP. Tente novamente mais tarde.");
-            });
-        } else {
-            // CEP inválido
-            alert("CEP inválido. O CEP deve conter 8 dígitos.");
-        }
-    });
-});
-</script>
+    <!-- Começo Modal Perfil Encargo -->
+    <div class="modal fade" id="modalPerfilEncargo" tabindex="-1" aria-labelledby="modalPerfilEncargoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPerfilEncargoLabel">Cadastrar Encargos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_encargo' %}">
+                        {% csrf_token %}
+                        <div class="encargo-container">
+                            <div class="mb-3">
+                                <label for="dataCadastro" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="dataCadastroInput" name="dataCadastro" required>
+                            </div>                       
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Encargos</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Perfil Encargo -->
 
-    
+    <!-- Começo Modal Calendário -->
+    <div class="modal fade" id="modalCalendario" tabindex="-1" aria-labelledby="modalCalendarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCalendarioLabel">Cadastrar Dias</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_data' %}">
+                        {% csrf_token %}
+                        <div class="calendario-container">
+                            {% comment %} <div class="mb-3">
+                                <label for="calendario" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="calendarioInput" name="calendario" required>
+                            </div>                        {% endcomment %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Calendário->
+
+    <!- Começo Modal Jornada -->
+    <div class="modal fade" id="modalHorasProdutivas" tabindex="-1" aria-labelledby="modalHorasProdutivasLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalHorasProdutivasLabel">Cadastrar Jornada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_jornada' %}">
+                        {% csrf_token %}
+                        <div class="jornada-container">
+                            {% comment %} <div class="mb-3">
+                                <label for="calendario" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="calendarioInput" name="calendario" required>
+                            </div>                        {% endcomment %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Jornada->
+
+    <! Começo Modal Hora Fixa -->
+    <div class="modal fade" id="modalHoraFixa" tabindex="-1" aria-labelledby="modalHoraFixasLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalHoraFixaLabel">Cadastrar Horas Produtivas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'inserir_jornada' %}">
+                        {% csrf_token %}
+                        <div class="jornada-container">
+                            {% comment %} <div class="mb-3">
+                                <label for="calendario" class="form-label">Data Cadastro</label>
+                                <input type="text" class="form-control" id="calendarioInput" name="calendario" required>
+                            </div>                        {% endcomment %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fim modal Jornada-->
+
 </body>
 </html>
