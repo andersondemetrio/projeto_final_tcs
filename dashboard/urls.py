@@ -15,4 +15,6 @@ urlpatterns = [
     path('inserir_data/', inserir_data, name='inserir_data'),
     path('inserir_jornada/', inserir_jornada, name='inserir_jornada'),
     path('inserir_horas/', inserir_horas, name='inserir_horas'),
+    path('inserir_calendario/',inserir_calendario,name='inserir_calendario'),
+    path('colaboradores_view/',colaboradores_view,name='colaboradores_view'),
 ]
