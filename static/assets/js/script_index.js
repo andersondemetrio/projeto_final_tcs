@@ -88,35 +88,35 @@ document.addEventListener('DOMContentLoaded', function () {
             new bootstrap.Switch(checkbox);
         });
     });
-
 });
 
-
-// Importar a biblioteca jQuery (certifique-se de incluir isso no seu HTML)
-// <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-// script_index.js (ou o arquivo onde está seu código JavaScript)
+// Verifica se o modal deve ser mantido aberto e se há mensagens de erro
+ document.addEventListener("DOMContentLoaded", function() {
+    if (keepModalOpen && messagesExist) {
+        // Exibe o modal
+        $('#modalSenha').modal('show');
+    }
+});
 
 // Função para buscar e preencher os campos do endereço a partir do CEP
-// Comentado por que não funcionou
-// $(document).ready(function() {
-//     // Capturando o evento de clique no botão de buscar CEP
-//     $("#btnBuscarCEP").click(function() {
-//         // Capturando o valor do campo de entrada do CEP
-//         var cep = $("#cepInput").val();
+$(document).ready(function() {
+    // Capturando o evento de clique no botão de buscar CEP
+    $("#btnBuscarCEP").click(function() {
+        // Capturando o valor do campo de entrada do CEP
+        var cep = $("#cepInput").val();
         
-//         // Construindo a URL da API ViaCEP com o CEP inserido
-//         var url = "https://viacep.com.br/ws/" + cep + "/json/";
+        // Construindo a URL da API ViaCEP com o CEP inserido
+        var url = "https://viacep.com.br/ws/" + cep + "/json/";
         
-//         // Fazendo a requisição AJAX para a API ViaCEP
-//         $.get(url, function(data) {
-//             // Preenchendo os campos do formulário com os dados retornados pela API
-//             $("#logradouro").val(data.logradouro);
-//             $("#endereco").val(data.endereco);
-//             $("#bairro").val(data.bairro);
-//             $("#cidade").val(data.localidade);
-//             $("#estado").val(data.uf);
-//         });
-//     });
-// });
+        // Fazendo a requisição AJAX para a API ViaCEP
+        $.get(url, function(data) {
+            // Preenchendo os campos do formulário com os dados retornados pela API
+            $("#logradouro").val(data.logradouro);
+            $("#endereco").val(data.endereco);
+            $("#bairro").val(data.bairro);
+            $("#cidade").val(data.localidade);
+            $("#estado").val(data.uf);
+        });
+    });
+});
 
