@@ -17,4 +17,5 @@ urlpatterns = [
     path('inserir_horas/', inserir_horas, name='inserir_horas'),
     path('inserir_calendario/',inserir_calendario,name='inserir_calendario'),
     path('colaboradores_view/',colaboradores_view,name='colaboradores_view'),
+    path('busca/', search, name='busca'),
 ]

@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             new bootstrap.Switch(checkbox);
         });
     });
+
 });
 
 // Verifica se o modal deve ser mantido aberto e se há mensagens de erro
@@ -179,3 +180,17 @@ document.addEventListener("DOMContentLoaded", function () {
         form.submit();
     });
 });
+
+const openModalButton = document.getElementById("openModalButton");
+const modal = document.getElementById("myModal");
+const closeButtons = document.getElementsByClassName("close");
+
+openModalButton.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+for (const closeButton of closeButtons) {
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}

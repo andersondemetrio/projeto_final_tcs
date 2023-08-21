@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Página inicial</title>
     <link rel="stylesheet" href="{% static 'assets/css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/tabelas.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script>
@@ -20,6 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="{% static 'assets/js/script_login.js' %}"></script>
     <script defer src="{% static 'assets/js/script_index.js' %}"></script>
+    <script defer src="{% static 'assets/js/script_tabelas.js' %}"></script>
     <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider-swiper-bundle.min.js' %}"></script>
     <script defer src="{% static 'assets/js/Simple-Slider.js' %}"></script>
@@ -74,7 +76,7 @@
                             </svg>Mão de Obra</a>
                         <div id="maoDeObraCollapse" class="collapse">
                             <ul class="ul-item">
-                                <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalCargoSalario">Cargo / Salário</a></li>
+                                <li class="li-pad"><a class="nav-sub" id="openModalButton">Cargo / Salário</a></li>
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalPerfilBeneficio">Benefícios</a></li>
                                 <li class="li-pad"><a class="nav-sub" data-bs-toggle="modal" href="#modalPerfilEncargo">Encargos</a></li>
                             </ul>
@@ -384,6 +386,31 @@
     </div>
     <!--Fim modal Alterar Senha -->
 
+    <div id="myModal" class="modal">
+        <div class="modal-personalizado">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <form id="searchForm" method="get" action="{% url 'busca' %}">
+                <div class="mb-3">
+                    <input type="text" name="search" placeholder="Buscar Cargos">
+                    <button type="submit" id="searchButton" class="btn btn-primary">Buscar</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCargoSalario">Cadastrar Cargo</button>
+                </div>
+            </form>
+            <table id="searchResultsTable">
+                <tbody>
+
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+        <!--Fim modal Cargos / Salários -->
+
     <!-- Começo Modal Cargos / Salários -->
     <div class="modal fade" id="modalCargoSalario" tabindex="-1" aria-labelledby="modalCargoSalarioLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -407,7 +434,7 @@
                             <div class="mb-3">
                                 <label for="selectPerfilBeneficio" class="form-label">Perfil Benefício</label>
                                 <select class="form-select" name="selectPerfilBeneficio" required>
-                                    <option value="" selected disabled>Selecione um perfil</option>
+                                    <option value="" selected disabled>Selecione um perfil</option> 
                                     {% comment %} {% for endereco in enderecos %}
                                         <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
                                     {% endfor %} {% endcomment %}

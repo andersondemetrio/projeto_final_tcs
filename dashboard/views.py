@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -52,7 +53,7 @@ def inserir_mao_de_obra(request):
         beneficios = request.POST['beneficios']
         encargos = request.POST['encargos']
         cargo_id = request.POST['cargo']  # Certifique-se de que esse é o nome correto do campo
-        endereco_id = request.POST['endereco']
+        # endereco_id = request.POST['endereco']
 
         cargo = Cargos.objects.get(id=cargo_id)
         
@@ -64,7 +65,7 @@ def inserir_mao_de_obra(request):
             beneficios=beneficios,
             encargos=encargos,
             cargo=cargo,  # Associando o cargo à mão de obra
-            endereco_id=endereco_id
+            # endereco_id=endereco_id
         )
         mao_de_obra.save()
         return HttpResponse("Mão de obra cadastrada com sucesso!")
@@ -204,3 +205,12 @@ def colaboradores_view(request):
     colaboradores = Colaboradores.objects.all()
     colaboradores_list = [{'id': colaborador.id, 'nome': colaborador.nome} for colaborador in colaboradores]
     return JsonResponse({'colaboradores': colaboradores_list})
+
+def search(request): 
+    q = request.GET.get('search')   
+    cargos = Cargos.objects.filter(nome_cargo__icontains=q)
+    
+    paginator = Paginator(cargos, 5)  # 5 itens por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number) 
+    return render(request, 'pesquisa_cargo.html', {'page_obj': page_obj})

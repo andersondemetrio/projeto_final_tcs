@@ -1,0 +1,44 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Pesquisa Cargos</title>
+    <link rel="stylesheet" href="{% static 'assets/css/tabelas.css' %}" />
+</head>
+<body>
+    <thead>    
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+        </tr>
+    </thead>    
+    {% for cargo in page_obj %}
+        <tr>
+            <td>{{ cargo.id }}</td>
+            <td>{{ cargo.nome_cargo }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; primeira</a>
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+            {% endif %}
+    
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
