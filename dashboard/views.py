@@ -16,8 +16,6 @@ from django.conf import settings
 import random
 from .models import GastosFixos,Colaboradores,Cargos, Endereco, Empresa,CalendarioMensal
 
-
-
 @login_required
 def dashboard_view(request):
     if request.session.get('empresa_cadastrada'):
@@ -210,7 +208,7 @@ def search(request):
     q = request.GET.get('search')   
     cargos = Cargos.objects.filter(nome_cargo__icontains=q)
     
-    paginator = Paginator(cargos, 5)  # 5 itens por página
+    paginator = Paginator(cargos, 100)  # 5 itens por página
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) 
     return render(request, 'pesquisa_cargo.html', {'page_obj': page_obj})

@@ -1,26 +1,27 @@
 table {
     width: 70%;
-    margin: 40px auto;    
+    margin: 40px auto;
     border-collapse: collapse;
     text-align: center;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
 
-thead > tr {
+thead>tr {
     background-color: rgb(37, 31, 77);
     color: white;
 }
 
-tr > th, tr > td {
-    padding: 5px 5px;
+tr>th,
+tr>td {
+    padding: 7px 7px;
 }
 
-tbody > tr:nth-last-of-type(even) {
+tbody>tr:nth-last-of-type(even) {
     background-color: rgba(0, 0, 0, 0.100);
 }
 
-tbody > tr:last-of-type {
+tbody>tr:last-of-type {
     border-bottom: 5px solid rgb(37, 31, 77);
 }
 
@@ -31,12 +32,27 @@ tbody > tr:last-of-type {
     gap: 5px;
     justify-content: center;
     position: static;
-    bottom: 0;    
+    bottom: 0;
 }
 
-.pagination > a {
+.pagination>a {
     background-color: rgb(37, 31, 77);
     padding: 10px 15px;
     color: white;
     border-radius: 10px;
+}
+
+.bi {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.bi-pencil-fill {
+    color: green;
+}
+
+.bi-trash-fill {
+    color: rgb(161, 0, 0);
+    font-weight: bolder;
 }
