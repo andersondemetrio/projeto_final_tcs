@@ -19,7 +19,7 @@
         var messagesExist = {% if messages %}true{% else %}false{% endif %};
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="{% static 'assets/js/script_login.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>     
     <script defer src="{% static 'assets/js/script_index.js' %}"></script>
     <script defer src="{% static 'assets/js/script_tabelas.js' %}"></script>
     <script defer src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -386,17 +386,22 @@
     </div>
     <!--Fim modal Alterar Senha -->
 
+
+    <!--Início modal Personalizado/ CARGOS E SALÁRIOS -->
     <div id="myModal" class="modal">
         <div class="modal-personalizado">
           <div class="modal-header">
+            <p class="p-modal-person mb-0">Cargos / Salários</p>
             <span class="close">&times;</span>
           </div>
           <div class="modal-body">
             <form id="searchForm" method="get" action="{% url 'busca' %}">
-                <div class="mb-3">
-                    <input type="text" name="search" placeholder="Buscar Cargos">
-                    <button type="submit" id="searchButton" class="btn btn-primary">Buscar</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCargoSalario">Cadastrar Cargo</button>
+                <div class="">
+                    <div class="input-group div-modal-person">
+                        <input type="text" class="form-control input-modal-person" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="search" value="{{ search_query }}" placeholder="Buscar Cargos">
+                        <button type="submit" id="searchButton" class="btn btn-outline-primary">Buscar</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCargoSalario">Cadastrar Cargo</button>
+                    </div>
                 </div>
             </form>
             <table id="searchResultsTable">
@@ -404,14 +409,14 @@
 
                 </tbody>
             </table>
-            <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-outline-dark close" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>
     </div>
-        <!--Fim modal Cargos / Salários -->
+    <!--Fim modal Personalizado / CARGOS E SALÁRIOS -->
 
-    <!-- Começo Modal Cargos / Salários -->
+    <!-- Começo Modal / CARGOS E SALÁRIOS -->
     <div class="modal fade" id="modalCargoSalario" tabindex="-1" aria-labelledby="modalCargoSalarioLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -463,7 +468,8 @@
             </div>
         </div>
     </div>
-    <!--Fim modal Cargos / Salários -->
+    <!--Fim modal / CARGOS E SALÁRIOS -->
+
 
     <!-- Começo Modal Perfil Benefício -->
     <div class="modal fade" id="modalPerfilBeneficio" tabindex="-1" aria-labelledby="modalPerfilBeneficioLabel" aria-hidden="true">

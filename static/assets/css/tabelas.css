@@ -42,17 +42,16 @@ tbody>tr:last-of-type {
     border-radius: 10px;
 }
 
-.bi {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
 
 .bi-pencil-fill {
+    font-size: 20px;
     color: green;
+    font-weight: bolder;
+    padding-right: 10px;
 }
 
 .bi-trash-fill {
+    font-size: 20px;
     color: rgb(161, 0, 0);
     font-weight: bolder;
 }
