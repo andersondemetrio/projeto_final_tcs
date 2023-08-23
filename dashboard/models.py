@@ -77,5 +77,3 @@ class CalendarioMensal(models.Model):
     dias_uteis = models.PositiveIntegerField()
     jornada_diaria = models.DecimalField(max_digits=5, decimal_places=2)  # Adicione este campo
     horas_produtivas = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-
-
