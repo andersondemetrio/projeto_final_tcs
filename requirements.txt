@@ -3,10 +3,8 @@ beautifulsoup4==4.12.2
 bootstrap4==0.1.0
 Django==4.2.4
 django-bootstrap4==23.2
-django-pagination==1.0.7
 psycopg2==2.9.7
 python-decouple==3.8
 soupsieve==2.4.1
 sqlparse==0.4.4
-typing_extensions==4.7.1
 tzdata==2023.3
