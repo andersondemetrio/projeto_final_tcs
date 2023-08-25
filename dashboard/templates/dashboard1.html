@@ -429,36 +429,12 @@
                     <form method="post" action="{% url 'inserir_cargo' %}">
                         {% csrf_token %}
                         <div class="cargo-container">
+
                             <div class="mb-3">
-                                <label for="dataCadastro" class="form-label">Data Cadastro</label>
-                                <input type="text" class="form-control" id="dataCadastroInput" name="dataCadastro" required>
-                            </div>                       
-                            <div class="mb-3">
-                                <label for="nomeCargo" class="form-label">Nome Cargo</label>
-                                <input type="text" class="form-control" id="nomeCargo" name="nomeCargo" required>
+                                <label for="nome_cargo" class="form-label">Nome Cargo</label>
+                                <input type="text" class="form-control" id="nome_cargo" name="nome_cargo" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="selectPerfilBeneficio" class="form-label">Perfil Benefício</label>
-                                <select class="form-select" name="selectPerfilBeneficio" required>
-                                    <option value="" selected disabled>Selecione um perfil</option> 
-                                    {% comment %} {% for endereco in enderecos %}
-                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
-                                    {% endfor %} {% endcomment %}
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="selectPerfilEncargo" class="form-label">Perfil Encargo</label>
-                                <select class="form-select" name="selectPerfilEncargo" required>
-                                    <option value="" selected disabled>Selecione um perfil</option>
-                                    {% comment %} {% for endereco in enderecos %}
-                                        <option value="{{ endereco.id }}">{{ endereco.endereco }}</option>
-                                    {% endfor %} {% endcomment %}
-                                </select>
-                            </div>
-                            <div class="mb-3 form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="ativa">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Considerar no Rateio</label>
-                            </div>
+
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar Cargo</button>
                     </form>

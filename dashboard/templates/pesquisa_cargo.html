@@ -26,7 +26,9 @@
             <td>{{ cargo.id }}</td>
             <td>{{ cargo.nome_cargo }}</td>
             <td>
-                <i class="bi bi-pencil-fill"></i>
+                {% comment %} <a href="{% url 'editar_cargo' cargo.id %}" class="edit-link" data-bs-toggle="modal" data-bs-target="#modalCargoSalario"> {% endcomment %}
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
                 <a href="{% url 'deletar_cargo' cargo.id %}" class="delete-link">
                     <i class="bi bi-trash-fill delete-icon"></i>
                 </a>

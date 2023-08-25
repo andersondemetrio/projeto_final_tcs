@@ -68,7 +68,32 @@ def inserir_mao_de_obra(request):
         mao_de_obra.save()
         return HttpResponse("Mão de obra cadastrada com sucesso!")
 
-# Funções do CRUD de cargos 
+# Funções do CRUD de cargos
+
+def inserir_cargo(request):
+    if request.method == 'POST':
+        nome_cargo = request.POST['nome_cargo']
+
+        cargo = Cargos(
+            nome_cargo=nome_cargo,
+        )
+        
+        cargo.save()
+        return redirect('dashboard')
+
+    return render(request, 'dashboard1.html', context={}) 
+
+def editar_cargo(request):
+    cargo = Cargo.objects.get(pk=cargo_id)
+    if request.method == 'POST':
+        nome_cargo = request.POST.get['nome_cargo']
+
+        cargo.nome_cargo = nome_cargo
+        
+        cargo.save()
+        return redirect('dashboard')
+
+    return render(request, 'dashboard1.html', context={}) 
 
 def cargos_vieww(request):
     cargos = Cargos.objects.all()
@@ -126,7 +151,7 @@ def inserir_empresa(request):
         )
         
         empresa.save()
-        request.session['empresa_cadastrada'] = True
+        # request.session['empresa_cadastrada'] = True
         return redirect('dashboard')
 
     return render(request, 'dashboard1.html', context={})
@@ -163,9 +188,6 @@ def alterar_senha(request):
         else:
             messages.error(request, 'As senhas não coincidem.')
     return render(request, 'dashboard1.html', {'keep_modal_open': True})
-
-def inserir_cargo(request):
-    return render(request, 'dashboard1.html', context={})
 
 def inserir_beneficio(request):
     return render(request, 'dashboard1.html', context={})

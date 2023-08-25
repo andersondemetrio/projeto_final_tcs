@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Erro na busca:', error);
             });
     });
+    
 
     // Intercepta o clique nos links de paginação
     const paginationLinks = document.querySelectorAll(".pagination a");

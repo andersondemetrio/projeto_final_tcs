@@ -55,3 +55,7 @@ tbody>tr:last-of-type {
     color: rgb(161, 0, 0);
     font-weight: bolder;
 }
+
+a {
+    text-decoration: none;
+}
