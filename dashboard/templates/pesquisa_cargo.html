@@ -9,6 +9,9 @@
     <title>Pesquisa Cargos</title>
     <link rel="stylesheet" href="{% static 'assets/css/tabelas.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="{% static 'assets/js/script_tabelas.js' %}"></script>
+    <script defer src="{% static 'assets/js/delete.js' %}"></script>
 </head>
 <body>
     <thead>    
@@ -22,7 +25,12 @@
         <tr>
             <td>{{ cargo.id }}</td>
             <td>{{ cargo.nome_cargo }}</td>
-            <td><i class="bi bi-pencil-fill"></i><i class="bi bi-trash-fill"></i></td>
+            <td>
+                <i class="bi bi-pencil-fill"></i>
+                <a href="{% url 'deletar_cargo' cargo.id %}" class="delete-link">
+                    <i class="bi bi-trash-fill delete-icon"></i>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 </body>

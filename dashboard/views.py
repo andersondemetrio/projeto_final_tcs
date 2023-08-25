@@ -68,16 +68,29 @@ def inserir_mao_de_obra(request):
         mao_de_obra.save()
         return HttpResponse("Mão de obra cadastrada com sucesso!")
 
+# Funções do CRUD de cargos 
+
 def cargos_vieww(request):
     cargos = Cargos.objects.all()
     cargos_list = [{'id': cargo.id, 'nome_cargo': cargo.nome_cargo} for cargo in cargos]
     return JsonResponse({'cargos': cargos_list})
 
-# funciona, mas não mostra o resultado
-# def endereco_view(request):
-#     enderecos = Endereco.objects.all()
-#     enderecos_list = [{'id': endereco.id, 'endereco': endereco.endereco} for endereco in enderecos]
-#     return JsonResponse({'enderecos': enderecos_list})
+def deletar_cargo(request, cargo_id):
+    if request.method == 'POST':
+        try:
+            cargo = Cargos.objects.get(pk=cargo_id)
+            cargo.delete()
+            return redirect('dashboard')
+        except Cargo.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Registro não encontrado"})
+    else:
+        try:
+            cargo = Cargos.objects.get(pk=cargo_id)
+            return render(request, 'confirm_delete.html')
+        except cargo.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Registro não encontrado"})
+
+# Funções do CRUD de endereços
 
 def endereco_view(request):
     enderecos = Endereco.objects.all()

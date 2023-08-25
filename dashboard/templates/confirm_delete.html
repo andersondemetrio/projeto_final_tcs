@@ -1,0 +1,20 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Exclusão</title>
+</head>
+<body>
+    <h1>Confirmação de Exclusão</h1>
+    <p>Tem certeza de que deseja excluir?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+        <button><a href="/dashboard/">Cancelar</a>
+    </form>
+</body>
+</html>

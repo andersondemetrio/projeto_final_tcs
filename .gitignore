@@ -1,6 +1,7 @@
 venv
 db.sqlite3
 *__pycash__
+/__pycache__/
 # Environments
 .env
 .venv
